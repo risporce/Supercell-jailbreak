@@ -1,4 +1,5 @@
 # Supercell-jailbreak
+#Notes#
 I will add more Supercell games ipa with this jailbreak check disabled in the future
 
 I recommend you install this ipa using Filza and Appsync Unified, sideloading it could cause a login failed error
