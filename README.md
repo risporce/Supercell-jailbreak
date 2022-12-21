@@ -10,4 +10,4 @@ If you encounter a crash during playing, startup or whenever, open an issue with
 ## Download ##
 
 ### It hasn't been test on ipads, AppIcon could not show/ the game could not work ###
-Brawl Stars version 47.190: https://mega.nz/file/s8FgkDhY#Au787_RKyUdPaJCowHsOQEw7NuDMa6xqxlpgO_C6s14
+Brawl Stars version 47.227: https://mega.nz/file/MoslVK4T#l_LWMfk0GG07iwiHST37hqZwGS5ueTRMqltA6ejzU40
