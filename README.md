@@ -10,4 +10,5 @@ If you encounter a crash during playing, startup or whenever, open an issue with
 ## Download ##
 
 ### It hasn't been test on ipads, AppIcon could not show/ the game could not work ###
-Brawl Stars version 47.227: https://mega.nz/file/MoslVK4T#l_LWMfk0GG07iwiHST37hqZwGS5ueTRMqltA6ejzU40
+Brawl Stars version 48.300: https://mega.nz/file/hh1BwYAA#9Ag5LQMUCOIFwIqKzPJy8xu3G7PyA34vhS6wPsbB0wg ;
+decryption key in case mega is asking for it : 9Ag5LQMUCOIFwIqKzPJy8xu3G7PyA34vhS6wPsbB0wg
