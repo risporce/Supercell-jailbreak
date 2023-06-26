@@ -15,6 +15,8 @@ Clash of Clans 15.352.6 [https://www.mediafire.com/file/sipbr7zh10xk3ix/Clash_of
 
 Brawl Stars 49.189 [https://gofile.io/d/uY5885](https://gofile.io/d/uY5885)
 
+Clash Royale 3.3314.2 [https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Royale3.3314.2NoJb.ipa/file](https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Royale3.3314.2NoJb.ipa/file)
+
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
 1. Discord @risporce
