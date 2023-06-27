@@ -13,7 +13,7 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 ### It hasn't been test on ipads, AppIcon could not show/ the game could not work ###
 Clash of Clans 15.352.6 [https://www.mediafire.com/file/sipbr7zh10xk3ix/Clash_of_Clans15.352.6NoJb.ipa/file](https://www.mediafire.com/file/sipbr7zh10xk3ix/Clash_of_Clans15.352.6NoJb.ipa/file)
 
-Brawl Stars 49.189 [https://gofile.io/d/uY5885](https://gofile.io/d/uY5885)
+Brawl Stars 50.201 [https://www.mediafire.com/file/pvihcnhwqkg0bbx/Brawl_Stars50.201NoJb.ipa/file](https://www.mediafire.com/file/pvihcnhwqkg0bbx/Brawl_Stars50.201NoJb.ipa/file)
 
 Clash Royale 3.3314.2 [https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Royale3.3314.2NoJb.ipa/file](https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Royale3.3314.2NoJb.ipa/file)
 
