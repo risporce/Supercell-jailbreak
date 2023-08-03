@@ -17,10 +17,12 @@ Brawl Stars 50.219 [https://www.mediafire.com/file/53p679sqs06aczo/Brawl_Stars50
 
 Clash Royale 3.3314.2 [https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Royale3.3314.2NoJb.ipa/file](https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Royale3.3314.2NoJb.ipa/file)
 
+Hay Day 1.58.81 [https://www.mediafire.com/file/gzyt4xyd8gre7i3/HayDay1.58.81NoJb.ipa/file](https://www.mediafire.com/file/gzyt4xyd8gre7i3/HayDay1.58.81NoJb.ipa/file)
+
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
-1. Discord @risporce
-2. Telegram risporce
+
+Discord and Telegram: risporce
 
 ## FAQ ##
 
