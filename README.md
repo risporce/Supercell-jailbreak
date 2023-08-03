@@ -19,6 +19,8 @@ Clash Royale 3.3314.2 [https://www.mediafire.com/file/7xad8kghdxnf4so/Clash_Roya
 
 Hay Day 1.58.81 [https://www.mediafire.com/file/gzyt4xyd8gre7i3/HayDay1.58.81NoJb.ipa/file](https://www.mediafire.com/file/gzyt4xyd8gre7i3/HayDay1.58.81NoJb.ipa/file)
 
+Clash Mini 1.7 [https://www.mediafire.com/file/qc5hli716knoj9k/Clash_Mini1.7NoJb.ipa/file](https://www.mediafire.com/file/qc5hli716knoj9k/Clash_Mini1.7NoJb.ipa/file)
+
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
 
