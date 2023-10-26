@@ -32,7 +32,10 @@ Discord and Telegram: risporce
 At this moment, i don't have enough information about the jailbreak detection to make a working deb tweak to patch the jailbreak detection
 
 #### Is there a chance of getting banned from this? #### 
-While i have never been banned from using modded ipa which i do for 2 years already, other popular mods on android got massive player ban so i can only say USE THIS AT YOUR OWN RISK, i am not responsible if your account is getting banned. But hey, if you arrived here, it's because you couldn't play anyway right ;)
+While i have never been banned from using modded IPA which i do for 2 years already, other popular mods on android got massive player ban so i can only say USE THIS AT YOUR OWN RISK, i am not responsible if your account is getting banned. But hey, if you arrived here, it's because you couldn't play anyway right ;)
+
+#### Why are in app purchases blocked ? ####
+Any repackaged IPA and the same applies for Android with repackaged APKs, they has not been officially installed from the store and in app purchases are disabled. Hopefully with Supercell there is a workaround and it's to use their store here [https://store.supercell.com/](https://store.supercell.com/) to make purchases to your account (and it have a better value than the real game purchase)
 
 ### Enjoy being able to play again supercell games! ###
 This content is not affiliated with, endorsed, sponsored, or specifically approved by Supercell and Supercell is not responsible for it. For more information see: [Supercell's Fan Content Policy](https://supercell.com/en/fan-content-policy/) and also [Supercell's Term of Service](https://supercell.com/en/terms-of-service/)
