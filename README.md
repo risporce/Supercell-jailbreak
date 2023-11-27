@@ -17,7 +17,7 @@ Brawl Stars 52.177 [https://www.mediafire.com/file/oez8gnjborzn94r/Brawl_Stars52
 
 Clash Royale 4.88.4 [https://www.mediafire.com/file/2oagfvh9pbd7o11/Clash_Royale4.88.4NoJb.ipa/file](https://www.mediafire.com/file/2oagfvh9pbd7o11/Clash_Royale4.88.4NoJb.ipa/file)
 
-Hay Day 1.60.212 (soon)
+Hay Day 1.60.212 [https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file](https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file)
 
 Clash Mini 1.7 [https://www.mediafire.com/file/qc5hli716knoj9k/Clash_Mini1.7NoJb.ipa/file](https://www.mediafire.com/file/qc5hli716knoj9k/Clash_Mini1.7NoJb.ipa/file)
 
