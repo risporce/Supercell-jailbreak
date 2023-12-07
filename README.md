@@ -19,7 +19,7 @@ Clash Royale 4.88.4 [https://www.mediafire.com/file/2oagfvh9pbd7o11/Clash_Royale
 
 Hay Day 1.60.212 [https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file](https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file)
 
-Clash Mini 1.7 [https://www.mediafire.com/file/qc5hli716knoj9k/Clash_Mini1.7NoJb.ipa/file](https://www.mediafire.com/file/qc5hli716knoj9k/Clash_Mini1.7NoJb.ipa/file)
+Clash Mini 1.8 [https://www.mediafire.com/file/l2045b248213fds/Clash_Mini1.8NoJb.ipa/file](https://www.mediafire.com/file/l2045b248213fds/Clash_Mini1.8NoJb.ipa/file)
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
