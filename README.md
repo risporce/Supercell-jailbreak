@@ -14,7 +14,7 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 
 ### *Clash of Clans 16.0.4 and Brawl Stars 53.166 are crashing for some devices ###
 
-Clash of Clans 16.0.4 [https://www.mediafire.com/file/86cnba2o3sybik6/Clash_of_Clans16.0.4NoJb.ipa/file](https://www.mediafire.com/file/86cnba2o3sybik6/Clash_of_Clans16.0.4NoJb.ipa/file)
+Clash of Clans 16.0.4 (Fix) [https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file](https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file)
 
 Brawl Stars 53.166 [https://www.mediafire.com/file/283zcb9ieaqssuh/Brawl_Stars53.166NoJb.ipa/file](https://www.mediafire.com/file/283zcb9ieaqssuh/Brawl_Stars53.166NoJb.ipa/file)
 
