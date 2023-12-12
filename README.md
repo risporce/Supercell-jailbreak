@@ -12,7 +12,7 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 
 ### It hasn't been test on ipads, AppIcon could not show/ the game could not work ###
 
-### *Clash of Clans 16.0.4 and Brawl Stars 53.166 are crashing for some devices ###
+### * Brawl Stars 53.166 crashing for some devices! temporary fix: you are able to play if you reboot your device, i'm still investigating the issue ###
 
 Clash of Clans 16.0.4 (Fix) [https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file](https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file)
 
