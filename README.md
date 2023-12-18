@@ -12,11 +12,9 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 
 ### It hasn't been test on ipads, AppIcon could not show/ the game could not work ###
 
-### * Brawl Stars 53.166 crashing for some devices! temporary fix: you are able to play if you reboot your device, i'm still investigating the issue ###
-
 Clash of Clans 16.0.4 (Fix) [https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file](https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file)
 
-Brawl Stars 53.166 [https://www.mediafire.com/file/283zcb9ieaqssuh/Brawl_Stars53.166NoJb.ipa/file](https://www.mediafire.com/file/283zcb9ieaqssuh/Brawl_Stars53.166NoJb.ipa/file)
+Brawl Stars 53.176 (fix) [https://www.mediafire.com/file/rnniq8oj20w2grj/Brawl_Stars53.176NoJb.ipa/file](https://www.mediafire.com/file/rnniq8oj20w2grj/Brawl_Stars53.176NoJb.ipa/file)
 
 Clash Royale 5.142 [https://www.mediafire.com/file/l1ak5mthe2s2zo9/Clash_Royale5.142NoJb.ipa/file](https://www.mediafire.com/file/l1ak5mthe2s2zo9/Clash_Royale5.142NoJb.ipa/file)
 
