@@ -12,15 +12,17 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 
 ### It hasn't been test on ipads, AppIcon could not show/ the game could not work ###
 
-Clash of Clans 16.0.4 (Fix) [https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file](https://www.mediafire.com/file/m0biksh26viqdea/Clash_of_Clans16.0.4_Fix_NoJb.ipa/file)
+Clash of Clans 16.0.8 [https://www.mediafire.com/file/xjrqhzs1tyz1i2d/Clash_of_Clans16.0.8NoJb.ipa/file](https://www.mediafire.com/file/xjrqhzs1tyz1i2d/Clash_of_Clans16.0.8NoJb.ipa/file)
 
 Brawl Stars 53.176 (fix) [https://www.mediafire.com/file/rnniq8oj20w2grj/Brawl_Stars53.176NoJb.ipa/file](https://www.mediafire.com/file/rnniq8oj20w2grj/Brawl_Stars53.176NoJb.ipa/file)
 
-Clash Royale 5.142 [https://www.mediafire.com/file/l1ak5mthe2s2zo9/Clash_Royale5.142NoJb.ipa/file](https://www.mediafire.com/file/l1ak5mthe2s2zo9/Clash_Royale5.142NoJb.ipa/file)
+Clash Royale 5.142.17 [https://www.mediafire.com/file/uaavpolnq5uo6kh/Clash_Royale5.142.17NoJb.ipa/file](https://www.mediafire.com/file/uaavpolnq5uo6kh/Clash_Royale5.142.17NoJb.ipa/file)
 
 Hay Day 1.60.212 [https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file](https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file)
 
 Clash Mini 1.8 [https://www.mediafire.com/file/l2045b248213fds/Clash_Mini1.8NoJb.ipa/file](https://www.mediafire.com/file/l2045b248213fds/Clash_Mini1.8NoJb.ipa/file)
+
+Boom Beach 50.101 [https://www.mediafire.com/file/asrq4rxr8puigrf/Boom_Beach50.101NoJb.ipa/file](https://www.mediafire.com/file/asrq4rxr8puigrf/Boom_Beach50.101NoJb.ipa/file)
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
