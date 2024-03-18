@@ -16,9 +16,9 @@ Clash of Clans 16.137 [https://www.mediafire.com/file/ips4x4pmse4pody/Clash_of_C
 
 Brawl Stars 54.243 [https://www.mediafire.com/file/smqq3xwnweiy0a6/Brawl_Stars54.243NoJb.ipa/file](https://www.mediafire.com/file/smqq3xwnweiy0a6/Brawl_Stars54.243NoJb.ipa/file)
 
-Clash Royale 6.256 (soon)
+Clash Royale 6.256 [https://www.mediafire.com/file/st1ht35rlvl3dmb/Clash_Royale6.256NoJb.ipa/file](https://www.mediafire.com/file/st1ht35rlvl3dmb/Clash_Royale6.256NoJb.ipa/file)
 
-Hay Day 1.60.212 [https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file](https://www.mediafire.com/file/a3duqm6fdurfrla/Hay_Day1.60.212NoJb.ipa/file)
+Hay Day 1.61.258 [https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file](https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file)
 
 Clash Mini 1.8 [https://www.mediafire.com/file/l2045b248213fds/Clash_Mini1.8NoJb.ipa/file](https://www.mediafire.com/file/l2045b248213fds/Clash_Mini1.8NoJb.ipa/file)
 
