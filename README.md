@@ -14,7 +14,7 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 
 Clash of Clans 16.137 [https://www.mediafire.com/file/ips4x4pmse4pody/Clash_of_Clans16.137.6NoJb.ipa/file](https://www.mediafire.com/file/ips4x4pmse4pody/Clash_of_Clans16.137.6NoJb.ipa/file)
 
-Brawl Stars 54.243 [https://www.mediafire.com/file/smqq3xwnweiy0a6/Brawl_Stars54.243NoJb.ipa/file](https://www.mediafire.com/file/smqq3xwnweiy0a6/Brawl_Stars54.243NoJb.ipa/file)
+Brawl Stars 54.298 [https://www.mediafire.com/file/ayd9uz53fs3ce43/Brawl_Stars54.298NoJb.ipa/file](https://www.mediafire.com/file/ayd9uz53fs3ce43/Brawl_Stars54.298NoJb.ipa/file)
 
 Clash Royale 6.256 [https://www.mediafire.com/file/y9m3d0yizuuothz/Clash_Royale6.256.8NoJb.ipa/file](https://www.mediafire.com/file/y9m3d0yizuuothz/Clash_Royale6.256.8NoJb.ipa/file)
 
