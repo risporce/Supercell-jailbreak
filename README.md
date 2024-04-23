@@ -14,13 +14,15 @@ Since the main executable has been modified to apply the patches, the IPA needs 
 
 Clash of Clans 16.253 [https://www.mediafire.com/file/uc93euv15ba47mw/Clash_of_clans16.253NoJb.ipa/file](https://www.mediafire.com/file/uc93euv15ba47mw/Clash_of_clans16.253NoJb.ipa/file)
 
-Brawl Stars 54.298 [https://www.mediafire.com/file/ayd9uz53fs3ce43/Brawl_Stars54.298NoJb.ipa/file](https://www.mediafire.com/file/ayd9uz53fs3ce43/Brawl_Stars54.298NoJb.ipa/file)
+Brawl Stars 55.211 soon
 
 Clash Royale 6.256 [https://www.mediafire.com/file/y9m3d0yizuuothz/Clash_Royale6.256.8NoJb.ipa/file](https://www.mediafire.com/file/y9m3d0yizuuothz/Clash_Royale6.256.8NoJb.ipa/file)
 
 Hay Day 1.61.258 [https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file](https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file)
 
 Boom Beach 51.115 [https://www.mediafire.com/file/t76ng84ywolax0w/Boom_Beach51.115NoJb.ipa/file](https://www.mediafire.com/file/t76ng84ywolax0w/Boom_Beach51.115NoJb.ipa/file)
+
+Squad Busters 3.1999 (eventually)
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
