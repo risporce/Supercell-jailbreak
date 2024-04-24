@@ -22,7 +22,7 @@ Hay Day 1.61.258 [https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.25
 
 Boom Beach 51.115 [https://www.mediafire.com/file/t76ng84ywolax0w/Boom_Beach51.115NoJb.ipa/file](https://www.mediafire.com/file/t76ng84ywolax0w/Boom_Beach51.115NoJb.ipa/file)
 
-Squad Busters 3.1999 (eventually)
+Squad Busters [3.1999 https://www.mediafire.com/file/0e3u3sinkr49g9p/Squad_Busters3.1999NoJb.ipa/file](https://www.mediafire.com/file/0e3u3sinkr49g9p/Squad_Busters3.1999NoJb.ipa/file)
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social media:
