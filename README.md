@@ -20,7 +20,7 @@ Clash Royale 6.256 [https://www.mediafire.com/file/9jyazkqdm5p6cje/Clash_Royale6
 
 Hay Day 1.61.258 [https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file](https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file)
 
-Boom Beach 51.115 [https://www.mediafire.com/file/t76ng84ywolax0w/Boom_Beach51.115NoJb.ipa/file](https://www.mediafire.com/file/t76ng84ywolax0w/Boom_Beach51.115NoJb.ipa/file)
+Boom Beach 52.88 (soon)
 
 Squad Busters 3.1999 (fix) [https://www.mediafire.com/file/llpsqs8skva47e8/Squad_Busters3.1999NoJb%2528FIX%2529.ipa/file](https://www.mediafire.com/file/llpsqs8skva47e8/Squad_Busters3.1999NoJb%2528FIX%2529.ipa/file)
 
