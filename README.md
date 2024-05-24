@@ -44,7 +44,7 @@ While I have never been banned from using modded `.ipas` which I do for 2 years 
 Any repackaged `.ipa` and the same applies for Android with repackaged `apks`, they has not been officially installed from the store and in app purchases are disabled. Hopefully with Supercell there is a workaround and it's to use their store here [https://store.supercell.com/](https://store.supercell.com/) to make purchases to your account (and it have a better value than the real game purchase)
 
 #### The app doesn't work on Mac? ####
-Supercell does not officially supports playing on MacOS computers, while some people have told me they managed to play on their Mac, It is possible that some of these `ipas` just doesn't work on MacOS and there's i can do.
+Supercell does not officially supports playing on MacOS computers, while some people have told me they managed to play on their Mac, It is possible that some of these `ipas` just doesn't work on MacOS and there's nothing i can do.
 
 #### Bugs in the game: ####
 I am not Supercell developer nor a game developer, i don't modify anything in the executable that can cause a crash/bug in the middle of the game, the protection I remove is only being done during the black screen state of the game. Therefore, i can't fix bugs that happens in the game, that's to Supercell to fix them.
