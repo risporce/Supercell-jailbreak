@@ -23,9 +23,11 @@ Clash Royale 6.256 [https://www.mediafire.com/file/9jyazkqdm5p6cje/Clash_Royale6
 
 Hay Day 1.61.258 [https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file](https://www.mediafire.com/file/khj4eku629c7wuw/Hay_Day_1.61.258NoJb.ipa/file)
 
-Boom Beach 52.91 [https://www.mediafire.com/file/kjudvtu13ktvcyu/Boom_Beach52.91NoJb.ipa/file](https://www.mediafire.com/file/kjudvtu13ktvcyu/Boom_Beach52.91NoJb.ipa/file)
+Boom Beach 52.102 (soon)
 
 Squad Busters 4.326 [https://www.mediafire.com/file/c7bvzvnb9xmgu2g/Squad_Busters4.326NoJb.ipa/file](https://www.mediafire.com/file/c7bvzvnb9xmgu2g/Squad_Busters4.326NoJb.ipa/file)
+
+new to Squad Busters ? use this link to get a free gift in the game once you reach desert world! https://play.squadbusters.com/Lx8a/ue8l46lq
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social medias:
