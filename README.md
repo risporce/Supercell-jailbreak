@@ -21,11 +21,11 @@ Brawl Stars 55.211 [https://www.mediafire.com/file/4qik9lh2z38h7h3/Brawl_Stars55
 
 Clash Royale 6.256 [https://www.mediafire.com/file/9jyazkqdm5p6cje/Clash_Royale6.256.20NoJb.ipa/file](https://www.mediafire.com/file/9jyazkqdm5p6cje/Clash_Royale6.256.20NoJb.ipa/file)
 
-Hay Day 1.62.80 [https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file](https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file)
+Hay Day 1.62.180 [https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file](https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file)
 
 Boom Beach 52.101 [https://www.mediafire.com/file/5rq2l47418xx47m/Boom_Beach52.101NoJb.ipa/file](https://www.mediafire.com/file/5rq2l47418xx47m/Boom_Beach52.101NoJb.ipa/file)
 
-Squad Busters 4.326 [https://www.mediafire.com/file/c7bvzvnb9xmgu2g/Squad_Busters4.326NoJb.ipa/file](https://www.mediafire.com/file/c7bvzvnb9xmgu2g/Squad_Busters4.326NoJb.ipa/file)
+Squad Busters 5.261 [https://www.mediafire.com/file/tayx0irdsitbjd7/Squad_Busters5.261NoJb.ipa/file](https://www.mediafire.com/file/tayx0irdsitbjd7/Squad_Busters5.261NoJb.ipa/file)
 
 new to Squad Busters ? use this link to get a free gift in the game once you reach desert world! https://play.squadbusters.com/Lx8a/ue8l46lq
 
