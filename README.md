@@ -25,9 +25,7 @@ Hay Day 1.62.180 [https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180
 
 Boom Beach 53.81 [https://www.mediafire.com/file/bpdfzj2q38ca2a1/Boom_Beach53.81NoJb.ipa/file](https://www.mediafire.com/file/bpdfzj2q38ca2a1/Boom_Beach53.81NoJb.ipa/file)
 
-Squad Busters 5.261 [https://www.mediafire.com/file/tayx0irdsitbjd7/Squad_Busters5.261NoJb.ipa/file](https://www.mediafire.com/file/tayx0irdsitbjd7/Squad_Busters5.261NoJb.ipa/file)
-
-new to Squad Busters ? use this link to get a free gift in the game once you reach desert world! https://play.squadbusters.com/Lx8a/ue8l46lq
+Squad Busters 6.420 (soon)
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social medias:
