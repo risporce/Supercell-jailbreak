@@ -19,13 +19,13 @@ Clash of Clans 16.386.9 (bug fixes) [https://www.mediafire.com/file/tt49d52apt62
 
 Brawl Stars 56.274 [https://www.mediafire.com/file/487c7fvteuyisqe/Brawl_Stars56.274NoJb.ipa/file](https://www.mediafire.com/file/487c7fvteuyisqe/Brawl_Stars56.274NoJb.ipa/file)
 
-Clash Royale 7.288.30 [https://www.mediafire.com/file/27o0lja6q5ava3s/Clash_Royale7.288.30NoJb.ipa/file](https://www.mediafire.com/file/27o0lja6q5ava3s/Clash_Royale7.288.30NoJb.ipa/file)
+Clash Royale 7.288.38 [https://www.mediafire.com/file/r7nfkka72r6fhv9/Clash_Royale7.288.38NoJb.ipa/file](https://www.mediafire.com/file/r7nfkka72r6fhv9/Clash_Royale7.288.38NoJb.ipa/file)
 
 Hay Day 1.62.180 [https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file](https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file)
 
 Boom Beach 53.81 [https://www.mediafire.com/file/bpdfzj2q38ca2a1/Boom_Beach53.81NoJb.ipa/file](https://www.mediafire.com/file/bpdfzj2q38ca2a1/Boom_Beach53.81NoJb.ipa/file)
 
-Squad Busters 6.420 [https://www.mediafire.com/file/ytz5nxo5477pko2/Squad_Busters6.420NoJb.ipa/file](https://www.mediafire.com/file/ytz5nxo5477pko2/Squad_Busters6.420NoJb.ipa/file)
+Squad Busters 6.420.12 [https://www.mediafire.com/file/5rv9xxao811t232/Squad_Busters6.420.12NoJb.ipa/file](https://www.mediafire.com/file/5rv9xxao811t232/Squad_Busters6.420.12NoJb.ipa/file)
 
 ## Contact ##
 The main way to contact me if you have any question is throught the following social medias:
