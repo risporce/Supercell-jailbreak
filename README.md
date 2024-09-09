@@ -15,7 +15,7 @@ If you encounter a crash during playing, startup or whenever, open an issue or c
 
 Since the main executable has been modified to apply the patches, the IPA needs to be resign by a tool like [Sideloadly](https://sideloadly.io/) or If your iOS supports [TrollStore](https://github.com/opa334/TrollStore) you can also use that, therefore installing with filza can cause the game to crash.
 
-Clash of Clans 16.386.9 (bug fixes) [https://www.mediafire.com/file/tt49d52apt62x4g/Clash_of_Clans16.386.9NoJb.ipa/file](https://www.mediafire.com/file/tt49d52apt62x4g/Clash_of_Clans16.386.9NoJb.ipa/file)
+Clash of Clans 16.517 (soon)
 
 Brawl Stars 57.325 [https://www.mediafire.com/file/dtev6981ol4j7du/Brawl_Stars57.325NoJb.ipa/file](https://www.mediafire.com/file/dtev6981ol4j7du/Brawl_Stars57.325NoJb.ipa/file)
 
