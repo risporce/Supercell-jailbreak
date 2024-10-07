@@ -21,7 +21,7 @@ Brawl Stars 57.325 [https://www.mediafire.com/file/dtev6981ol4j7du/Brawl_Stars57
 
 Clash Royale 8.254.22 : (new format, will take a lot of time to figure out new fix for it)
 
-Hay Day 1.62.180 [https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file](https://www.mediafire.com/file/1iz9if6zx8b7cm5/Hay_Day1.62.180NoJb.ipa/file)
+Hay Day 1.63.204 [https://www.mediafire.com/file/29xd5q0pmwnkdoz/Hay_Day1.63.204NoJb.ipa/file](https://www.mediafire.com/file/29xd5q0pmwnkdoz/Hay_Day1.63.204NoJb.ipa/file)
 
 Boom Beach 54.70 [https://www.mediafire.com/file/ybxouicn544sgki/Boom_Beach54.70NoJb.ipa/file](https://www.mediafire.com/file/ybxouicn544sgki/Boom_Beach54.70NoJb.ipa/file)
 
