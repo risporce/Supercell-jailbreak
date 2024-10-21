@@ -25,7 +25,7 @@ Hay Day 1.63.204 [https://www.mediafire.com/file/29xd5q0pmwnkdoz/Hay_Day1.63.204
 
 Boom Beach 54.70 [https://www.mediafire.com/file/ybxouicn544sgki/Boom_Beach54.70NoJb.ipa/file](https://www.mediafire.com/file/ybxouicn544sgki/Boom_Beach54.70NoJb.ipa/file)
 
-Squad Busters 7.301: [https://www.mediafire.com/file/kez196oh07egkwf/Squad_Busters7.301NoJb.ipa/file](https://www.mediafire.com/file/kez196oh07egkwf/Squad_Busters7.301NoJb.ipa/file)
+Squad Busters 7.301: (eventually, don't ask when i don't know)
 
 ## Script ##
 Note to every developer: I made this script while I had not the slightest idea of what Mach-O executables are, variable names are very unrepresentative and may be even misleading.
