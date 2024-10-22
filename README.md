@@ -25,9 +25,11 @@ Hay Day 1.63.204 [https://www.mediafire.com/file/29xd5q0pmwnkdoz/Hay_Day1.63.204
 
 Boom Beach 54.70 [https://www.mediafire.com/file/ybxouicn544sgki/Boom_Beach54.70NoJb.ipa/file](https://www.mediafire.com/file/ybxouicn544sgki/Boom_Beach54.70NoJb.ipa/file)
 
-Squad Busters 7.301: (eventually, don't ask when i don't know)
+Squad Busters 8.401 [https://www.mediafire.com/file/7rxl84nj606cpfv/Squad_Buster8.401NoJb.ipa/file](https://www.mediafire.com/file/7rxl84nj606cpfv/Squad_Buster8.401NoJb.ipa/file)
 
 ## Script ##
+### **Not working with the new Squad Busters update, they shipped an updated protector and patched this method i was using to patch the games for more than a year**
+
 Note to every developer: I made this script while I had not the slightest idea of what Mach-O executables are, variable names are very unrepresentative and may be even misleading.
 
 While i know now the real name Mach-o sections, names ...etc i didn't at the time, and I did not rewrite the whole script variable names just for this. It would be a waste of time.
