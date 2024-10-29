@@ -17,7 +17,7 @@ game_code_name = {
     "Hay Day": "soil",
     "Clash_Royale": "scroll",
     "laser": "laser",
-    "Squad Busters": "squad",
+    "Squad": "squad",
     "Clash of Clans": "magic",
     "Boom Beach": "reef",
 }
@@ -257,25 +257,88 @@ def main(game):
     device = frida.get_usb_device()
     pid = device.spawn([f"com.supercell.{game}"])
     session = device.attach(pid) # the address of protectorBase.add(0x0) can change any new build of protector supercell is shipping in their client, at this moment it's 0x429728
-    script = session.create_script(f'''
-    var protectorBase = Module.findBaseAddress("{game}x"); 
-    var unk;
-    var encryptedInput;
-    var decryptedOutput;
-    var contentLength;
-    
-    var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0x429728), {{
-        onEnter(args) {{
-            unk = args[0];
-            encryptedInput = args[1];
-            decryptedOutput = args[2];
-            contentLength = args[3].toInt32();
-        }},
-        onLeave : function(retval) {{
-            send(decryptedOutput.readUtf8String());
-        }}
-    }});
-    ''')
+    if game == 'squad' or game == 'laser':
+        script = session.create_script(f'''
+            var protectorBase = Module.findBaseAddress("{game}x");
+            var StringFunctionEmulation = protectorBase.add(0x292cec);
+            function writeBLFunction(address, newFunctionAddress) {{
+                Memory.patchCode(address, 8, code => {{
+                    const Patcher = new Arm64Writer(code, {{pc: address}});
+                    Patcher.putBlImm(newFunctionAddress);
+                    Patcher.flush();
+                }});
+            }}
+
+            writeBLFunction(protectorBase.add(0xadd20), StringFunctionEmulation)
+            var unk;
+            var encryptedInput;
+            var decryptedOutput;
+            var contentLength;
+            
+            var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0x29bba0), {{
+                onEnter(args) {{
+                    unk = args[0];
+                    encryptedInput = args[1];
+                    decryptedOutput = args[2];
+                    contentLength = args[3].toInt32();
+                }},
+                onLeave : function(retval) {{
+                    send(decryptedOutput.readUtf8String());
+                    console.log(decryptedOutput.readUtf8String());
+                }}
+            }});
+            ''')
+    elif game == 'reef':
+        script = session.create_script(f'''
+            var protectorBase = Module.findBaseAddress("{game}x");
+            var StringFunctionEmulation = protectorBase.add(0x372474);
+            function writeBLFunction(address, newFunctionAddress) {{
+                Memory.patchCode(address, 8, code => {{
+                    const Patcher = new Arm64Writer(code, {{pc: address}});
+                    Patcher.putBlImm(newFunctionAddress);
+                    Patcher.flush();
+                }});
+            }}
+
+            writeBLFunction(protectorBase.add(0x3a1d2c), StringFunctionEmulation)
+            var unk;
+            var encryptedInput;
+            var decryptedOutput;
+            var contentLength;
+            
+            var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0x3a4f3c), {{
+                onEnter(args) {{
+                    unk = args[0];
+                    encryptedInput = args[1];
+                    decryptedOutput = args[2];
+                    contentLength = args[3].toInt32();
+                }},
+                onLeave : function(retval) {{
+                    send(decryptedOutput.readUtf8String());
+                    console.log(decryptedOutput.readUtf8String());
+                }}
+            }});
+            ''')
+    else:
+        script = session.create_script(f'''
+        var protectorBase = Module.findBaseAddress("{game}x"); 
+        var unk;
+        var encryptedInput;
+        var decryptedOutput;
+        var contentLength;
+        
+        var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0x429728), {{
+            onEnter(args) {{
+                unk = args[0];
+                encryptedInput = args[1];
+                decryptedOutput = args[2];
+                contentLength = args[3].toInt32();
+            }},
+            onLeave : function(retval) {{
+                send(decryptedOutput.readUtf8String());
+            }}
+        }});
+        ''')
 
     script.on('message', on_message)
     script.load()
