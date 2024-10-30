@@ -22,7 +22,7 @@ And lastly, for those who shown me their concerns about me modifying the ipa and
   ### Prequisites  
   -  Python 3 https://www.python.org/ (tested with 3.12): download for your OS 
   -  Frida https://github.com/frida/frida : pip install frida and frida-server on your iOS device
-  -  MachoLib https://macholib.readthedocs.io/en/latest/ : pip install machlib
+  -  MachoLib https://macholib.readthedocs.io/en/latest/ : pip install macholib
 
   ### Usage
   1. Extract the game ipa and upload it to your computer
