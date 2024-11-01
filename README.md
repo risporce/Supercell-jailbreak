@@ -20,17 +20,19 @@ And lastly, for those who shown me their concerns about me modifying the ipa and
 
 
   ### Prequisites  
+  -  **JAILBROKEN** iOS device
   -  Python 3 https://www.python.org/ (tested with 3.12): download for your OS 
-  -  Frida https://github.com/frida/frida : pip install frida and frida-server on your iOS device
-  -  MachoLib https://macholib.readthedocs.io/en/latest/ : pip install macholib
+  -  Frida https://github.com/frida/frida : `pip install frida` as well as `pip install frida-tools`. Setup frida-server on your iOS device (https://frida.re/docs/ios/#with-jailbreak) and execute the "Quick smoke-test" to ensure your environment is working. If you are stuck at "waiting USB device to appear, try to use with -H parameter https://github.com/frida/frida/issues/579#issuecomment-416574476"
+  -  MachoLib https://macholib.readthedocs.io/en/latest/ : `pip install macholib`
 
   ### Usage
-  1. Extract the game ipa and upload it to your computer
-  2. Connect your device to your computer via USB cable
+  0. Download and extract zip or clone the repository `git clone https://github.com/risporce/Supercell-jailbreak.git` then `cd Supercell-jailbreak`
+  1. Extract the game ipa from your device and upload it to your computer
+  2. Connect your device to your computer via USB cable, make sure to trust your computer from your device.
   3. From your computer, use any zip unarchiver like PeaZip or 7Zip to extract the IPA
   4. Place the main executable file at the same directory as the script
-  5. In terminal, go to the directory of where your files are (cd path/to/folder)
-  6. Execute this command: `python3 sc_protector_file_parser.py --game "replace this text under string to the executable file name, keep the quotes"`
+  5. Open Terminal app, use the `cd` comamnd to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
+  6. Execute this command in terminal: `python3 sc_protector_file_parser.py --game "replace this text under string to the executable file name, keep the quotes"`
   7. If you moved the main executable, put it back into the IPA and replace the original one.
   8. Compress the Payload folder into .zip and rename to .ipa
   9. Use your favorite method to install the .IPA
