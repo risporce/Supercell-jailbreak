@@ -7,7 +7,7 @@ import sys
 from datetime import datetime
 import struct
 import argparse
-#pip install machlib, needs to install this library
+#pip install macholib, needs to install this library
 from macholib.MachO import MachO
 
 
@@ -41,6 +41,7 @@ newExportOff = None # hd 1.63.204 //0x2473850
 newExportSize = None # hd 1.63.204 //0x1bd4f8
 newLazyBindingSize = None
 lc_dyld_info_onlyStartAddress = None
+nameOffset = None
 ####
 decrypted_bi = None
 fileToOpen = None
@@ -68,6 +69,7 @@ def setup():
     global newExportSize
     global lc_dyld_info_onlyStartAddress
     global protectorLoaderStartAddress
+    global nameOffset
     loader_found = False
     getProtectorPatchBytes()
     binary = MachO(fileToOpen)
@@ -88,16 +90,17 @@ def setup():
                 newExportOff = exportOff + 2000 # if we enlarge the size of the lazy binding, a solution is to trim the size of the export table since it's not all used anyway
                 newExportSize = exportSize - 2000
                 lc_dyld_info_onlyStartAddress = current_offset
-                print(f"Found LC_DYLD_INFO_ONLY at offset at : {hex(current_offset)}")
+                print(f"[INFO] Found LC_DYLD_INFO_ONLY at offset at : {hex(current_offset)}")
             elif load_cmd.get_cmd_name() == 'LC_SYMTAB': # this is here in all format so far
                 stringTableStartAddress = cmd[1].stroff
                 find__mh_execute_header_strtab_and_symbtab_offset(cmd[1].stroff, cmd[1].strsize, cmd[1].symoff, cmd[1].nsyms)
             elif load_cmd.get_cmd_name() == 'LC_LOAD_DYLIB':
                 if loader_found:
                     return
-                # protector loader is always always the first one, so we can stop after it reached the first
+                # protector loader is always always the first one, so we can stop after it reached the first, this means
+                nameOffset = cmd[1].name
                 protectorLoaderStartAddress = current_offset
-                print(f"Found protector loader at: {hex(current_offset)}")
+                print(f"[INFO] Found protector loader at: {hex(current_offset)}")
                 loader_found = True
             current_offset += load_cmd.cmdsize
     
@@ -118,7 +121,7 @@ def find__mh_execute_header_strtab_and_symbtab_offset(strTableStartOffset, strTa
             print(f"Error: {search_string} not found in that range")
             return None
         stringTableFixingAddress = string_index + strTableStartOffset + len(search_string) +1
-        print(f"Found string table fixing address at: {hex(lazyBindingFixingAddress)}")
+        print(f"[INFO] Found string table fixing address at: {hex(lazyBindingFixingAddress)}")
         
         f.seek(symTableStartOffset)
         symbol_table = f.read(symTableNbOffsets * SYMBOL_TABLE_INFO_LENGTH)
@@ -128,7 +131,7 @@ def find__mh_execute_header_strtab_and_symbtab_offset(strTableStartOffset, strTa
             return None
         symbolTableStartAddress = symbol_index + symTableStartOffset + len(search_bytes_symbol)
         startCountingAddress = stringTableFixingAddress - stringTableStartAddress
-        print(f"Found symbol table start address at: {hex(symbolTableStartAddress)}")
+        print(f"[INFO] Found symbol table start address at: {hex(symbolTableStartAddress)}")
     
     f.close()
 
@@ -141,16 +144,17 @@ def on_message(message, data):
         mainFixing(lines)
         
     elif message['type'] == 'error':
-        print(f"[-] {message['stack']}")
+        print(f"[ERROR] {message['stack']}")
 
 
 def removeProtectorLoader(binf):
-    if protectorLoaderStartAddress is not None:
+    binf.seek(protectorLoaderStartAddress + nameOffset, 0)
+    if read_null_terminated_string(binf) == f"@rpath/{game}x.framework/{game}x":
         binf.seek(protectorLoaderStartAddress, 0)
         binf.write(protectorLoaderPatchBytes)
-        print("removed protector loader")
+        print("[INFO] removed protector loader")
     else:
-        print("protector loader already removed")
+        print("[WARNING] protector loader is not present in the executable, has it been removed already?")
 
 def fixExport(binf):
     if lc_dyld_info_onlyStartAddress is not None:
@@ -164,8 +168,7 @@ def fixExport(binf):
         binf.write(b'\x00' * exportSize)
         binf.seek(newExportOff, 0)
         binf.write(data)
-        print("fixed export functions data and size")
-
+        print("[INFO] fixed export functions data and size")
 
 def uleb128Encode(number):
     stringResult = ""
@@ -192,13 +195,13 @@ def fixInitArray(binf, line):
     binf.write(toBytes)
 
 
-def fixLazyBindingSection(binf, starting_char, function_class, function_string, function_data_and_name_length_additionned, pointer_bytes):
+def fixLazyBindingSection(binf, starting_char, symbol_ordinal, function_string, function_data_and_name_length_additionned, pointer_bytes):
     classChar = "@"
     starting_byte = "72"
     classByteStart = "20" 
-    if (int(function_class) < 16):
+    if (int(symbol_ordinal) < 16):
         classByteStart = "1"
-    classByte = f'{int(function_class):x}'
+    classByte = f'{int(symbol_ordinal):x}'
     classBytes = classByteStart + classByte
     end_bytes = "9000"
     pointerString = uleb128Encode(int(pointer_bytes))
@@ -209,47 +212,57 @@ def fixLazyBindingSection(binf, starting_char, function_class, function_string, 
     binf.seek(int(function_data_and_name_length_additionned) + lazyBindingFixingAddress, 0)
     binf.write(bytearray.fromhex(finalString))
 
-def fixStringTable(binf, starting_char, function_string, string_length_additionned_string_table_count):
+def fixStringTable(binf, starting_char, function_string, stringIndexInStringTable):
     fixingString = starting_char + function_string
     finalString = (bytes(fixingString, 'utf-8') + b'\x00').hex()
-    binf.seek(stringTableFixingAddress + string_length_additionned_string_table_count, 0)
+    binf.seek(stringTableFixingAddress + stringIndexInStringTable, 0)
     binf.write(bytearray.fromhex(finalString))
-    return string_length_additionned_string_table_count + len(bytearray.fromhex(finalString))
+    return stringIndexInStringTable + len(bytearray.fromhex(finalString))
 
-def fixSymbolTable(binf, string_length_additionned_string_table_count, function_class, count, functionPointer = None):
+def fixSymbolTable(binf, stringIndexInStringTable, symbol_ordinal, count, functionPointer = None):
     finalDataString = ""
-    bytesAwayFromStringInStringTable = struct.pack("<I", startCountingAddress + int(string_length_additionned_string_table_count))
-    finalDataString+= bytesAwayFromStringInStringTable.hex() + "010000" + str(hex(int(function_class))[2:].zfill(2)) + "0000000000000000"
+    bytesAwayFromStringInStringTable = struct.pack("<I", startCountingAddress + int(stringIndexInStringTable))
+    finalDataString+= bytesAwayFromStringInStringTable.hex() + "010000" + str(hex(int(symbol_ordinal))[2:].zfill(2)) + "0000000000000000"
 
     binf.seek(symbolTableStartAddress + (count * SYMBOL_TABLE_INFO_LENGTH), 0)
     binf.write(bytearray.fromhex(finalDataString))
 
 def fixBinary(binf, biFile):
     count = 0
-    stringLengthAdditionnedStringTableCount = 0
-    functionDataAndNameLengthAdditionned = 0
+    stringIndexInStringTable = 0
+    symbolTableDataIndex = 0
     for line in biFile:
         list_data = line.split(VALUE_SEPARATOR)
         if (int(list_data[2]) == INIT_INDICATOR):
             fixInitArray(binf, list_data)
         elif (int(list_data[2]) == V0_INDICATOR): # protector v0 where it is used in all supercell games except new clash royale
             startingChar = "_"
-            functionDataAndNameLengthAdditionned = list_data[3] #this is true but seems like protector not optimized and put some null bytes which are not supposed to be here, which makes it needed to increase lazy binding array
-            functionString = list_data[5]
-            functionClass = list_data[6]
-            pointerBytes = list_data[8] 
+            symbolTableDataIndex = list_data[3] #this is true but seems like protector not optimized and put some null bytes which are not supposed to be here, which makes it needed to increase lazy binding array
+            symbolName = list_data[5]
+            symbolOrdinalPosition = list_data[6]
+            pointerBytes = list_data[8]
 
-            fixLazyBindingSection(binf, startingChar, functionClass, functionString, functionDataAndNameLengthAdditionned, pointerBytes)
-            fixSymbolTable(binf, stringLengthAdditionnedStringTableCount, functionClass, count)
-            stringLengthAdditionnedStringTableCount = fixStringTable(binf, startingChar, functionString, stringLengthAdditionnedStringTableCount)
+            fixLazyBindingSection(binf, startingChar, symbolOrdinalPosition, symbolName, symbolTableDataIndex, pointerBytes)
+            fixSymbolTable(binf, stringIndexInStringTable, symbolOrdinalPosition, count)
+            stringIndexInStringTable = fixStringTable(binf, startingChar, symbolName, stringIndexInStringTable)
 
             count+=1
         elif (int(list_data[2]) == V5_INDICATOR): #new Clash Royale has this to 5, it's a different fix to apply
             # the thing i noticed is that we need to fix the symbol table and the string table but some minor modification from the code of v0, like it doesn't need the starting_char = "_", function names already have it
             functionPointer = int(list_data[3]) # refers to the got section, but why?
-            functionString = list_data[4]
-            functionClass = list_data[5]
+            symbolName = list_data[4]
+            symbolOrdinalPosition = list_data[5]
             count+=1
+
+def read_null_terminated_string(binf):
+    string = b''
+    while True:
+        char = binf.read(1)
+        if char == b'\x00' or not char:
+            break
+        string += char
+
+    return string.decode('utf-8')
 
 
 def main(game):
@@ -257,7 +270,7 @@ def main(game):
     device = frida.get_usb_device()
     pid = device.spawn([f"com.supercell.{game}"])
     session = device.attach(pid) # the address of protectorBase.add(0x0) can change any new build of protector supercell is shipping in their client, at this moment it's 0x429728
-    if game == 'squad' or game == 'laser':
+    if game == 'squad' or game == 'laser' or game == 'magic':
         script = session.create_script(f'''
             var protectorBase = Module.findBaseAddress("{game}x");
             var StringFunctionEmulation = protectorBase.add(0x292cec);
@@ -319,6 +332,38 @@ def main(game):
                 }}
             }});
             ''')
+        
+    elif game == 'scroll':
+        script = session.create_script(f'''
+            var protectorBase = Module.findBaseAddress("{game}x");
+            var StringFunctionEmulation = protectorBase.add(0x1b18d8);
+            function writeBLFunction(address, newFunctionAddress) {{
+                Memory.patchCode(address, 8, code => {{
+                    const Patcher = new Arm64Writer(code, {{pc: address}});
+                    Patcher.putBlImm(newFunctionAddress);
+                    Patcher.flush();
+                }});
+            }}
+
+            writeBLFunction(protectorBase.add(0x711a28), StringFunctionEmulation)
+            var unk;
+            var encryptedInput;
+            var decryptedOutput;
+            var contentLength;
+            
+            var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0xa72c0), {{
+                onEnter(args) {{
+                    unk = args[0];
+                    encryptedInput = args[1];
+                    decryptedOutput = args[2];
+                    contentLength = args[3].toInt32();
+                }},
+                onLeave : function(retval) {{
+                    send(decryptedOutput.readUtf8String());
+                    console.log(decryptedOutput.readUtf8String());
+                }}
+            }});
+            ''')
     else:
         script = session.create_script(f'''
         var protectorBase = Module.findBaseAddress("{game}x"); 
@@ -343,17 +388,18 @@ def main(game):
     script.on('message', on_message)
     script.load()
     device.resume(pid)
+    print("[INFO] setup done, don't exit, the computer can take up to a minute to exit frida session")
     sys.stdin.read()
 
+start_time = datetime.now()
 def mainFixing(biFile):
     with open(fileToOpen, 'r+b') as binf:
-        start_time = datetime.now()
         removeProtectorLoader(binf)
         fixExport(binf) # in clash royale protector v5 this is non-existent, a check is in place to not fix it in case of cr
         fixBinary(binf, biFile)
         end_time = datetime.now()
-        print("finished fixing binary file, you may now exit pressing CTRL+C")
-        print('Duration: {}'.format(end_time - start_time))
+        print("[SUCCESS] finished fixing binary file, you may now exit pressing CTRL+C")
+        print('[DEBUG] Duration: {}'.format(end_time - start_time))
 
 if __name__ == '__main__':
     args = parser.parse_args()
