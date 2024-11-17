@@ -66,12 +66,12 @@ def check_sip():
     if "disabled" in sip_status.lower():
         return True
     else:
-        print("[WARN] SIP включен! Невозможно использовать ваш макбук для патча...")
+        print("[WARN] SIP is enabled! Unable to use your macbook to patch...")
 def check_security_args():
     try:
         boot_args = subprocess.check_output(["nvram", "boot-args"], text=True).strip()
         
-        # Установка этих аргов отключает практически все функции безопасности на macOS, Frida теперь может работать без необходимости в code-signing свободно как рыба в воде
+        # Setting these args disables almost all security features on macOS, Frida can now work without the need for code-signing free as a fish in water
         required_args = [
             "arm64e_preview_abi",
             "thid_should_crash=0",
@@ -81,7 +81,7 @@ def check_security_args():
         
         return all(arg in boot_args for arg in required_args)
     except subprocess.CalledProcessError:
-        print("[ERROR] Не удалось получить бут арги. Возможно включен SIP")
+        print("[ERROR] Failed to get boot args. SIP may be enabled.")
 
 
 def setup():
