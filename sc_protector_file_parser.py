@@ -2,11 +2,8 @@
 
 # see https://github.com/frida/frida for installation instruction on your computer (use option 1 with only pip commands to execute)
 # see https://frida.re/docs/ios/ for installation instruction on your jailbroken iOS device
-import frida
-import sys
 from datetime import datetime
-import struct
-import argparse
+import argparse, struct, sys, frida, platform, subprocess
 #pip install macholib, needs to install this library
 from macholib.MachO import MachO
 
@@ -21,6 +18,7 @@ game_code_name = {
     "Clash of Clans": "magic",
     "Boom Beach": "reef",
 }
+
 #protector bi.txt
 VALUE_SEPARATOR = ";"
 INIT_INDICATOR = 10
@@ -57,6 +55,33 @@ def getProtectorPatchBytes():
     elif fileToOpen == "Clash_Royale":
         protectorLoaderPatchBytes = bytearray.fromhex("180000804000000018000000010000000000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000000000000000")
 
+def is_arm_mac():
+    if platform.system() == "Darwin":
+        architecture = platform.machine()
+        return architecture == "arm64"
+    return False
+    
+def check_sip():
+    sip_status = subprocess.check_output(["csrutil", "status"], text=True).strip()
+    if "disabled" in sip_status.lower():
+        return True
+    else:
+        print("[WARN] SIP is enabled! Unable to use your macbook to patch...")
+def check_security_args():
+    try:
+        boot_args = subprocess.check_output(["nvram", "boot-args"], text=True).strip()
+        
+        # Setting these args disables almost all security features on macOS, Frida can now work without the need for code-signing free as a fish in water
+        required_args = [
+            "arm64e_preview_abi",
+            "thid_should_crash=0",
+            "tss_should_crash=0",
+            "amfi_get_out_of_my_way=1"
+        ]
+        
+        return all(arg in boot_args for arg in required_args)
+    except subprocess.CalledProcessError:
+        print("[ERROR] Failed to get boot args. SIP may be enabled.")
 
 
 def setup():
@@ -267,8 +292,26 @@ def read_null_terminated_string(binf):
 
 def main(game):
     global session # frida script, needs to have a jailbroken ios device with frida-server installed. this is getting the necessary data in order to fix the binary
-    device = frida.get_usb_device()
-    pid = device.spawn([f"com.supercell.{game}"])
+    
+    isHostUsed = False
+    
+    if is_arm_mac():
+        if not check_sip(): print("[WARN] ARM-based macOS device detected, but SIP is enabled...")
+        if not check_security_args(): print("[WARN] ARM-based macOS device detected, but security features is enabled...")
+        
+    if is_arm_mac() and check_sip() and check_security_args():
+        print("[*] ARM-based macOS device detected, we try to use your host instead of a phone")
+        isHostUsed = True
+        
+        device = frida.get_local_device()
+        game_app_name = {"laser": "Brawl Stars"}
+        subprocess.check_output(["open", f"/Applications/{game_app_name[game]}.app"], text=True).strip()
+        pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
+    else:
+        device = frida.get_usb_device()
+        pid = device.spawn([f"com.supercell.{game}"])
+    
+    
     session = device.attach(pid) # the address of protectorBase.add(0x0) can change any new build of protector supercell is shipping in their client, at this moment it's 0x429728
     if game == 'squad' or game == 'laser' or game == 'magic':
         script = session.create_script(f'''
