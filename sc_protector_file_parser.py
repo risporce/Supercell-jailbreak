@@ -313,7 +313,7 @@ def main(game):
     
     
     session = device.attach(pid) # the address of protectorBase.add(0x0) can change any new build of protector supercell is shipping in their client, at this moment it's 0x429728
-    if game == 'squad' or game == 'laser' or game == 'magic' or game == 'reef':
+    if game == 'squad' or game == 'magic' or game == 'reef':
         script = session.create_script(f'''
             var protectorBase = Module.findBaseAddress("{game}x");
             var StringFunctionEmulation = protectorBase.add(0x292cec);
@@ -332,6 +332,37 @@ def main(game):
             var contentLength;
             
             var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0x29bba0), {{
+                onEnter(args) {{
+                    unk = args[0];
+                    encryptedInput = args[1];
+                    decryptedOutput = args[2];
+                    contentLength = args[3].toInt32();
+                }},
+                onLeave : function(retval) {{
+                    send(decryptedOutput.readUtf8String());
+                    console.log(decryptedOutput.readUtf8String());
+                }}
+            }});
+            ''')
+    elif game == 'laser' or game == 'soil':
+        script = session.create_script(f'''
+            var protectorBase = Module.findBaseAddress("{game}x");
+            var StringFunctionEmulation = protectorBase.add(0xfa80c);
+            function writeBLFunction(address, newFunctionAddress) {{
+                Memory.patchCode(address, 8, code => {{
+                    const Patcher = new Arm64Writer(code, {{pc: address}});
+                    Patcher.putBlImm(newFunctionAddress);
+                    Patcher.flush();
+                }});
+            }}
+
+            writeBLFunction(protectorBase.add(0x3f7d90), StringFunctionEmulation)
+            var unk;
+            var encryptedInput;
+            var decryptedOutput;
+            var contentLength;
+            
+            var readEncryptedFilesContent = Interceptor.attach(protectorBase.add(0x254b44), {{
                 onEnter(args) {{
                     unk = args[0];
                     encryptedInput = args[1];
