@@ -6,6 +6,8 @@
 So while other games are still easily fixable by the script with updated offset for the protector, Clash Royale on the other hand requires a rebuilding of LC_DYLD_CHAINED_FIXUPS. This will come to other games soon as they all will update to support iOS 14 as minimum eventually. IF but really IF i ever have the motivation to go throught the pain of trying again to fix iOS 14+ built executables and suceed, I will upload updated script here, otherwise **this repo is dead** or may update the script to support updated version of the protector.
 
 ## Script ##
+### Status: Brawl Stars and Hay Day will require offsets update in script. (will be updated later today
+
 ### **Not working with the new Clash Royale update, they shipped updated protectors, each of them a different build and patched this method i was using to patch the games for more than a year**
 
 Note to every developer: I made this script while I had not the slightest idea of what Mach-O executables are, variable names are very unrepresentative and may be even misleading.
