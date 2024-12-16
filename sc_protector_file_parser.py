@@ -10,6 +10,7 @@ from macholib.MachO import MachO
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--game', help='The game name you want to patch, enter its exact binary filename as string ex: "laser", "Clash of Clans", "Clash_Royale"')
+parser.add_argument('--mac', action='store_true', help='Use your Mac with apple M series chip to patch the app, requires you to install the IPA and disable a few protections including SIP')
 game_code_name = {
     "Hay Day": "soil",
     "Clash_Royale": "scroll",
@@ -290,23 +291,21 @@ def read_null_terminated_string(binf):
     return string.decode('utf-8')
 
 
-def main(game):
+def main(game, mac):
     global session # frida script, needs to have a jailbroken ios device with frida-server installed. this is getting the necessary data in order to fix the binary
     
-    isHostUsed = False
-    
-    if is_arm_mac():
-        if not check_sip(): print("[WARN] ARM-based macOS device detected, but SIP is enabled...")
-        if not check_security_args(): print("[WARN] ARM-based macOS device detected, but security features is enabled...")
-        
-    if is_arm_mac() and check_sip() and check_security_args():
-        print("[*] ARM-based macOS device detected, we try to use your host instead of a phone")
-        isHostUsed = True
-        
-        device = frida.get_local_device()
-        game_app_name = {"laser": "Brawl Stars"}
-        subprocess.check_output(["open", f"/Applications/{game_app_name[game]}.app"], text=True).strip()
-        pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
+    if mac:
+        if is_arm_mac():
+            if not check_sip(): print("[WARN] ARM-based macOS device detected, but SIP is enabled...")
+            if not check_security_args(): print("[WARN] ARM-based macOS device detected, but security features is enabled...")
+            
+        if is_arm_mac() and check_sip() and check_security_args():
+            print("[*] ARM-based macOS device detected, we try to use your host instead of a phone")
+            
+            device = frida.get_local_device()
+            game_app_name = {"laser": "Brawl Stars"}
+            subprocess.check_output(["open", f"/Applications/{game_app_name[game]}.app"], text=True).strip()
+            pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
     else:
         device = frida.get_usb_device()
         pid = device.spawn([f"com.supercell.{game}"])
@@ -447,8 +446,10 @@ def mainFixing(biFile):
 if __name__ == '__main__':
     args = parser.parse_args()
     a = args.game
+    is_using_mac = args.mac
+    print(is_using_mac)
     fileToOpen = a
     a = game_code_name.get(fileToOpen)
     game = a
     setup()
-    main(game)
+    main(game, is_using_mac)
