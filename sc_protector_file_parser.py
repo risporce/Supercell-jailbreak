@@ -316,8 +316,10 @@ def main(game, mac):
             except Exception as e:
                 print("[!] Failed to catch process PID, if your target game is launched in the dock, you need to figure out why pgrep command is causing an error. (you didnt work out? open issue)")
                 print("[*] Or just remove --mac from args to use iPhone")
+                exit(1)
         else:
-             print("[*] Remove --mac from args to use iPhone")
+             print("[*] SIP is probably enabled, disable it or remove --mac from args to use iPhone")
+             exit(1)
     if not mac: #this is so that we can switch to an iphone if it is impossible to use the host
         device = frida.get_usb_device()
         pid = device.spawn([f"com.supercell.{game}"])
