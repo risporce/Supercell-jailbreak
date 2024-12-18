@@ -66,7 +66,7 @@ def check_sip():
     sip_status = subprocess.check_output(["csrutil", "status"], text=True).strip().lower()
     if "disabled" in sip_status:
         return True
-    elif "Error getting variable" in sip_status: 
+    elif "error getting variable" in sip_status: 
         print("[*] boot-args is not exists in nvram?????")
         return False
     else:
