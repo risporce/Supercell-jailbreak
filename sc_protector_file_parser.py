@@ -63,11 +63,16 @@ def is_arm_mac():
     return False
     
 def check_sip():
-    sip_status = subprocess.check_output(["csrutil", "status"], text=True).strip()
-    if "disabled" in sip_status.lower():
+    sip_status = subprocess.check_output(["csrutil", "status"], text=True).strip().lower()
+    if "disabled" in sip_status:
         return True
+    elif "error getting variable" in sip_status: 
+        print("[*] boot-args is not exists in nvram?????")
+        return False
     else:
         print("[WARN] SIP is enabled! Unable to use your macbook to patch...")
+        return False
+    return False #something crazy happened again, so we forcibly think that sip is turned on
 def check_security_args():
     try:
         boot_args = subprocess.check_output(["nvram", "boot-args"], text=True).strip()
@@ -80,9 +85,14 @@ def check_security_args():
             "amfi_get_out_of_my_way=1"
         ]
         
-        return all(arg in boot_args for arg in required_args)
+        if all(arg in boot_args for arg in required_args):
+            return True
+        else:
+            print('[*] You do not have the required boot-args, install them with the command: sudo nvram boot-args="arm64e_preview_abi thid_should_crash=0 tss_should_crash=0 amfi_get_out_of_my_way=1"')
+            return False
     except subprocess.CalledProcessError:
         print("[ERROR] Failed to get boot args. SIP may be enabled.")
+        return False
 
 
 def setup():
@@ -295,17 +305,23 @@ def main(game, mac):
     global session # frida script, needs to have a jailbroken ios device with frida-server installed. this is getting the necessary data in order to fix the binary
     
     if mac:
-        if is_arm_mac():
-            if not check_sip(): print("[WARN] ARM-based macOS device detected, but SIP is enabled...")
-            if not check_security_args(): print("[WARN] ARM-based macOS device detected, but security features is enabled...")
-            
         if is_arm_mac() and check_sip() and check_security_args():
             print("[*] ARM-based macOS device detected, we try to use your host instead of a phone")
             
             device = frida.get_local_device()
-            game_app_name = {"laser": "Brawl Stars"}
+            
+            #correct pls if i indicated there something wrong, i only work on brawl stars and barely remember all this codenames
+            game_app_name = {"laser": "Brawl Stars", "magic": "Clash of Clans", "reef": "Boom Beach", "squad": "Squad Busters", "soil": "Hay Day", "scroll": "Clash Royale"}
             subprocess.check_output(["open", f"/Applications/{game_app_name[game]}.app"], text=True).strip()
-            pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
+            try: 
+                pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
+            except Exception as e:
+                print("[!] Failed to catch process PID, if your target game is launched in the dock, you need to figure out why pgrep command is causing an error. (you didnt work out? open issue)")
+                print("[*] Or just remove --mac from args to use iPhone")
+                exit(1)
+        else:
+             print("[*] SIP is probably enabled, disable it or remove --mac from args to use iPhone")
+             exit(1)
     else:
         device = frida.get_usb_device()
         pid = device.spawn([f"com.supercell.{game}"])
