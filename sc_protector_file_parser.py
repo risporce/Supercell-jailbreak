@@ -322,7 +322,7 @@ def main(game, mac):
         else:
              print("[*] SIP is probably enabled, disable it or remove --mac from args to use iPhone")
              exit(1)
-    if not mac: #this is so that we can switch to an iphone if it is impossible to use the host
+    else:
         device = frida.get_usb_device()
         pid = device.spawn([f"com.supercell.{game}"])
     
