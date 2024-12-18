@@ -309,7 +309,9 @@ def main(game, mac):
             print("[*] ARM-based macOS device detected, we try to use your host instead of a phone")
             
             device = frida.get_local_device()
-            game_app_name = {"laser": "Brawl Stars", "magic": "Clash of Clans", "reef": "Boom Beach"}
+            
+            #correct pls if i indicated there something wrong, i only work on brawl stars and barely remember all this codenames
+            game_app_name = {"laser": "Brawl Stars", "magic": "Clash of Clans", "reef": "Boom Beach", "squad": "Squad Busters", "soil": "Hay Day", "scroll": "Clash Royale"}
             subprocess.check_output(["open", f"/Applications/{game_app_name[game]}.app"], text=True).strip()
             try: 
                 pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
