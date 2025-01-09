@@ -3,7 +3,7 @@
 # see https://github.com/frida/frida for installation instruction on your computer (use option 1 with only pip commands to execute)
 # see https://frida.re/docs/ios/ for installation instruction on your jailbroken iOS device
 from datetime import datetime
-import argparse, struct, sys, frida, platform, subprocess
+import argparse, struct, sys, frida, platform, subprocess, time
 #pip install macholib, needs to install this library
 from macholib.MachO import MachO
 import os
@@ -57,9 +57,13 @@ protectorLoaderStartAddress = None # hd 1.63.204 //0x1348s
 
 class IPARepacker:
     def __init__(self, ipa_path, output_dir="unpacked_ipa", new_macho_path=None, output_ipa="output.ipa"):
+        
+        #C:\Users\rldv1\Desktop>py sc_protector_file_parser.py --rebuild --game=laser
+        #Enter the path to the IPA file (or use DragnDrop)> C:\Users\rldv1\Downloads\com.supercell.laser_59.197.ipa
+        
         self.ipa_path = ipa_path
         self.output_dir = output_dir
-        self.new_macho_path = new_macho_path
+        self.macho_name = new_macho_path
         self.output_ipa = output_ipa
         self.payload_dir = os.path.join(self.output_dir, "Payload")
         self.app_path = None
@@ -67,10 +71,15 @@ class IPARepacker:
     
     def _progress(self, p, current, total, file):
         percent = round((current / total) * 100, 1)
-        print(f"[{p.upper()} - {percent}%] Current: {file}")
-        if current == total: print("\nAll done.")
+        t = f"[{p.upper()} - {percent}%] Current: {file[-(os.get_terminal_size().columns - 32):]}" # <-- необходимо заполнить точно до кол-ва символов (columns) в консоли, так как иначе произойдет конфликт предыдущих строк1
+        l = os.get_terminal_size().columns - len(t)
+        t += "".join(" " for _ in range(l))
+        print(t,end="\r",flush=True)
+        if current == total: print(f"\n[{p.upper()}] Done.\n")
             
     def unpack(self):
+        time.sleep(1.0) # some moment
+        
         if os.path.exists(self.output_dir):
             shutil.rmtree(self.output_dir)
         os.makedirs(self.output_dir)
@@ -87,10 +96,8 @@ class IPARepacker:
         with open(os.path.join(self.app_path, "IPAREPACKER"), 'w') as f: f.write("Respect our work, dont sell this IPA...\n\nhttps://github.com/risporce/Supercell-jailbreak\n\nt.me/risporce\nt.me/rldv1")
     
     def is_macho_encrypted(self, macho_path):
-        # --- простая схема (и интуитивная)
-        # в Mach-O есть команда LC_ENCRYPTION_INFO_64 (или без _64 для арм32)
-        # в этой команде должно быть поле cryptid, и здесь мы его пытаемся прочесть, чтобы понять зашифрован ли Mach-O
-
+        # команда LC_ENCRYPTION_INFO_64 (или без _64 для арм32)
+        # бля мне скучно на паре сидеть слушать препода, я хочу домой, я хочу есть и спать
         with open(macho_path, 'rb') as f:
             f.seek(20)  # скип magic, cputype, cpusubtype
             ncmds = struct.unpack('<I', f.read(4))[0]
@@ -106,7 +113,7 @@ class IPARepacker:
         return False
         
     def remove_useless(self):
-        # удаляем бесполезное барахло из под промона (bi, ii, прочие)
+        # сносим барахло из под промона (bi, ii, прочие)
         targets = ["bi.txt", "ii.txt", "config-encrypt.txt"]
         for i in targets:
             ii = os.path.join(self.app_path, i)
@@ -121,18 +128,15 @@ class IPARepacker:
                 shutil.rmtree(item_path)
                 print("[*] Removing", item_path)
         
-    def replace_macho(self, newpath):
-        macho_name = os.path.basename(self.new_macho_path)
-        macho_path = os.path.join(self.app_path, "Crash")
+    def replace_macho(self):
+        macho_name = os.path.basename(self.macho_name)
+        macho_path = os.path.join(self.app_path, self.macho_name)
         if os.path.exists(macho_path):
             os.remove(macho_path)
-        shutil.copy(self.new_macho_path, macho_path)
+        shutil.copy(self.macho_name, macho_path)
         os.chmod(macho_path, 0o755)
         
     def ensure_macho(self):
-        #if not self.new_macho_path:
-        #    raise ValueError("Path to new Mach-O file not specified.")
-        # macho_name = os.path.basename(self.new_macho_path)
         
         print("[*] Checking Mach-O...")
         macho_path = os.path.join(self.app_path, "laser")
@@ -145,11 +149,10 @@ class IPARepacker:
         else:
             print("[*] Mach-O cant be found :/")
             raise Exception
-        
+        time.sleep(1.0) # some moment
 
     def pack(self):
-        time.sleep(2.0) # some moment
-        
+        time.sleep(1.0) # some moment
         files = []
         for root, _, file_list in os.walk(self.output_dir):
             for file in file_list:
@@ -162,10 +165,6 @@ class IPARepacker:
                 ipa.write(full_path, relative_path)
                 self._progress("packing", i, total_files, file)
         shutil.rmtree(self.output_dir)
-        
-
-
-
 
 
 
@@ -582,9 +581,17 @@ def mainFixing(biFile):
         print("[SUCCESS] finished fixing binary file, you may now exit pressing CTRL+C")
         print('[DEBUG] Duration: {}'.format(end_time - start_time))
 
+    if args.rebuild:
+        repacker.replace_macho()
+        repacker.pack()
+    
+    os._exit(0)
+    
+    
 if __name__ == '__main__':
     args = parser.parse_args()
     fileToOpen = args.game
+    game = game_code_name.get(fileToOpen)
     
     if args.rebuild:
         while 1:
@@ -592,8 +599,9 @@ if __name__ == '__main__':
             if os.path.exists(rebuild_path): break
             else: print("[!] Invalid file path. Example: /Users/rldv1/Downloads/laser-27.269.ipa or laser-27.269.ipa")
                 
-        
+        repacker = IPARepacker(rebuild_path, new_macho_path=fileToOpen, output_ipa="output.ipa")
+        repacker.unpack()
+        repacker.ensure_macho()
     
-    game = game_code_name.get(fileToOpen)
     setup()
     main(game, args.mac)
