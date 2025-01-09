@@ -56,7 +56,7 @@ protectorLoaderStartAddress = None # hd 1.63.204 //0x1348s
 
 
 class IPARepacker:
-    def __init__(self, ipa_path, output_dir="unpacked_ipa", new_macho_path=None, output_ipa="output.ipa"):
+    def __init__(self, ipa_path, output_dir="unpacked_ipa", new_macho_path=None, output_ipa):
         
         #C:\Users\rldv1\Desktop>py sc_protector_file_parser.py --rebuild --game=laser
         #Enter the path to the IPA file (or use DragnDrop)> C:\Users\rldv1\Downloads\com.supercell.laser_59.197.ipa
@@ -96,8 +96,8 @@ class IPARepacker:
         with open(os.path.join(self.app_path, "IPAREPACKER"), 'w') as f: f.write("Respect our work, dont sell this IPA...\n\nhttps://github.com/risporce/Supercell-jailbreak\n\nt.me/risporce\nt.me/rldv1")
     
     def is_macho_encrypted(self, macho_path):
-        # команда LC_ENCRYPTION_INFO_64 (или без _64 для арм32)
-        # бля мне скучно на паре сидеть слушать препода, я хочу домой, я хочу есть и спать
+        # LC_ENCRYPTION_INFO_64 (или без _64 для арм32)
+        
         with open(macho_path, 'rb') as f:
             f.seek(20)  # скип magic, cputype, cpusubtype
             ncmds = struct.unpack('<I', f.read(4))[0]
@@ -139,7 +139,7 @@ class IPARepacker:
     def ensure_macho(self):
         
         print("[*] Checking Mach-O...")
-        macho_path = os.path.join(self.app_path, "laser")
+        macho_path = os.path.join(self.app_path, fileToOpen)
         
         ENCRYPTED_STATE = self.is_macho_encrypted(macho_path)
         if os.path.exists(macho_path) and ENCRYPTED_STATE:
@@ -605,3 +605,5 @@ if __name__ == '__main__':
     
     setup()
     main(game, args.mac)
+    
+    
