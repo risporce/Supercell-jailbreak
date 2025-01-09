@@ -56,7 +56,7 @@ protectorLoaderStartAddress = None # hd 1.63.204 //0x1348s
 
 
 class IPARepacker:
-    def __init__(self, ipa_path, output_dir="unpacked_ipa", new_macho_path=None, output_ipa):
+    def __init__(self, ipa_path, output_dir="unpacked_ipa", new_macho_path=None, output_ipa="output.ipa"):
         
         #C:\Users\rldv1\Desktop>py sc_protector_file_parser.py --rebuild --game=laser
         #Enter the path to the IPA file (or use DragnDrop)> C:\Users\rldv1\Downloads\com.supercell.laser_59.197.ipa
@@ -582,6 +582,7 @@ def mainFixing(biFile):
         print('[DEBUG] Duration: {}'.format(end_time - start_time))
 
     if args.rebuild:
+        repacker.remove_useless()
         repacker.replace_macho()
         repacker.pack()
     
