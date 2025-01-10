@@ -3,14 +3,19 @@
 # see https://github.com/frida/frida for installation instruction on your computer (use option 1 with only pip commands to execute)
 # see https://frida.re/docs/ios/ for installation instruction on your jailbroken iOS device
 from datetime import datetime
-import argparse, struct, sys, frida, platform, subprocess
+import argparse, struct, sys, frida, platform, subprocess, time
 #pip install macholib, needs to install this library
 from macholib.MachO import MachO
+import os
+import zipfile
+import shutil
+import struct
 
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--game', help='The game name you want to patch, enter its exact binary filename as string ex: "laser", "Clash of Clans", "Clash_Royale"')
 parser.add_argument('--mac', action='store_true', help='Use your Mac with apple M series chip to patch the app, requires you to install the IPA and disable a few protections including SIP')
+parser.add_argument('--rebuild', action='store_true', help='Rebuild ipa, xd.')
 game_code_name = {
     "Hay Day": "soil",
     "Clash_Royale": "scroll",
@@ -44,9 +49,119 @@ nameOffset = None
 ####
 decrypted_bi = None
 fileToOpen = None
+binary_path = None
 protectorLoaderPatchBytes = None
 ### protector loader
 protectorLoaderStartAddress = None # hd 1.63.204 //0x1348s
+
+
+
+class IPARepacker:
+    def __init__(self, ipa_path, output_dir="unpacked_ipa", new_macho_path=None, output_ipa="output.ipa"):
+        
+        #C:\Users\rldv1\Desktop>py sc_protector_file_parser.py --rebuild --game=laser
+        #Enter the path to the IPA file (or use DragnDrop)> C:\Users\rldv1\Downloads\com.supercell.laser_59.197.ipa
+        
+        self.ipa_path = ipa_path
+        self.output_dir = output_dir
+        self.macho_name = new_macho_path
+        self.output_ipa = output_ipa
+        self.payload_dir = os.path.join(self.output_dir, "Payload")
+        self.app_path = None
+        print("Simple IPARepacker for risporce/Supercell-jailbreak by rldv1 <3")
+    
+    def _progress(self, p, current, total, file):
+        percent = round((current / total) * 100, 1)
+        t = f"[{p.upper()} - {percent}%] Current: {file[-(os.get_terminal_size().columns - 32):]}" # <-- необходимо заполнить точно до кол-ва символов (columns) в консоли, так как иначе произойдет конфликт предыдущих строк1
+        l = os.get_terminal_size().columns - len(t)
+        t += "".join(" " for _ in range(l))
+        print(t,end="\r",flush=True)
+        if current == total: print(f"\n[{p.upper()}] Done.\n")
+            
+    def unpack(self):
+        time.sleep(1.0) # some moment
+        
+        if os.path.exists(self.output_dir):
+            shutil.rmtree(self.output_dir)
+        os.makedirs(self.output_dir)
+        with zipfile.ZipFile(self.ipa_path, 'r') as ipa:
+            total_files = len(ipa.namelist())
+            for i, file in enumerate(ipa.namelist(), 1):
+                ipa.extract(file, self.output_dir)
+                self._progress("unpacking", i, total_files, file)
+                
+        apps = [f for f in os.listdir(self.payload_dir) if f.endswith('.app')] 
+        if not apps:
+            raise FileNotFoundError("[!!!] No .app directory found in Payload.")
+        self.app_path = os.path.join(self.payload_dir, apps[0])
+        with open(os.path.join(self.app_path, "IPAREPACKER"), 'w') as f: f.write("Respect our work, dont sell this IPA...\n\nhttps://github.com/risporce/Supercell-jailbreak\n\nt.me/risporce\nt.me/rldv1")
+    
+    def is_macho_encrypted(self, macho_path):
+        # LC_ENCRYPTION_INFO_64 (или без _64 для арм32)
+        
+        with open(macho_path, 'rb') as f:
+            f.seek(20)  # скип magic, cputype, cpusubtype
+            ncmds = struct.unpack('<I', f.read(4))[0]
+            f.seek(8, 1)  # скип sizeofcmds и флаги
+            for _ in range(ncmds):
+                cmd, cmdsize = struct.unpack('<II', f.read(8))
+                print(f"[*] с: {hex(cmd)}")
+                if cmd == 0x2C:
+                    f.seek(8, 1) 
+                    cryptid = struct.unpack('<I', f.read(4))[0]
+                    return cryptid == 1
+                f.seek(cmdsize - 8, 1)
+        return False
+        
+    def remove_useless(self):
+        # сносим барахло из под промона (bi, ii, прочие)
+        targets = ["bi.txt", "ii.txt", "config-encrypt.txt"]
+        for i in targets:
+            ii = os.path.join(self.app_path, i)
+            if os.path.exists(ii):
+                print("[*] Removing", ii)
+                os.remove(ii)
+        frameworks_dir = os.path.join(self.app_path, "Frameworks")
+        if not os.path.exists(frameworks_dir): return
+        for item in os.listdir(frameworks_dir):
+            item_path = os.path.join(frameworks_dir, item)
+            if os.path.isdir(item_path) and item.endswith("x.framework"):
+                shutil.rmtree(item_path)
+                print("[*] Removing", item_path)
+        
+    def ensure_macho(self):
+        
+        print("[*] Checking Mach-O...")
+        macho_path = os.path.join(self.app_path, fileToOpen)
+        
+        ENCRYPTED_STATE = self.is_macho_encrypted(macho_path)
+        if os.path.exists(macho_path) and ENCRYPTED_STATE:
+            print(f"[!!!] Mach-O is encrypted. Cannot proceed.\n\n------- What to do in this case?:\n1. Use tweaks like iGameGod/CrackerXI\n2. Download IPA from https://decrypt.day, https://armconverter.com/decryptedappstore/us or 4PDA\n\n[!] Dont open an issue on github about this as the problem lies on your end!\n----------------\n")
+            raise Exception
+        elif not ENCRYPTED_STATE: print("[*] Mach-O is decrypted, continuing...")
+        else:
+            print("[*] Mach-O cant be found :/")
+            raise Exception
+        time.sleep(1.0) # some moment
+
+    def pack(self):
+        time.sleep(1.0) # some moment
+        files = []
+        for root, _, file_list in os.walk(self.output_dir):
+            for file in file_list:
+                files.append((root, file))
+        total_files = len(files)
+        with zipfile.ZipFile(self.output_ipa, 'w', zipfile.ZIP_DEFLATED) as ipa:
+            for i, (root, file) in enumerate(files, 1):
+                full_path = os.path.join(root, file)
+                relative_path = os.path.relpath(full_path, self.output_dir)
+                ipa.write(full_path, relative_path)
+                self._progress("packing", i, total_files, file)
+        shutil.rmtree(self.output_dir)
+
+
+
+
 
 def getProtectorPatchBytes():
     global protectorLoaderPatchBytes
@@ -108,7 +223,7 @@ def setup():
     global nameOffset
     loader_found = False
     getProtectorPatchBytes()
-    binary = MachO(fileToOpen)
+    binary = MachO(binary_path)
     current_offset = 0
     for header in binary.headers:
         current_offset += header.header._size_
@@ -148,7 +263,7 @@ def find__mh_execute_header_strtab_and_symbtab_offset(strTableStartOffset, strTa
     global startCountingAddress
     search_string = "__mh_execute_header".encode()
     search_bytes_symbol = bytes.fromhex("0f0110000000000001000000") # mh_execute_header symbols data
-    with open(fileToOpen, 'rb') as f:
+    with open(binary_path, 'rb') as f:
         #string table index
         f.seek(strTableStartOffset)
         string_table = f.read(strTableLength)
@@ -451,7 +566,7 @@ def main(game, mac):
 
 start_time = datetime.now()
 def mainFixing(biFile):
-    with open(fileToOpen, 'r+b') as binf:
+    with open(binary_path, 'r+b') as binf:
         removeProtectorLoader(binf)
         fixExport(binf) # in clash royale protector v5 this is non-existent, a check is in place to not fix it in case of cr
         fixBinary(binf, biFile)
@@ -459,13 +574,32 @@ def mainFixing(biFile):
         print("[SUCCESS] finished fixing binary file, you may now exit pressing CTRL+C")
         print('[DEBUG] Duration: {}'.format(end_time - start_time))
 
+    if args.rebuild:
+        repacker.remove_useless()
+        #repacker.replace_macho()
+        repacker.pack()
+    
+    os._exit(0)
+    
+    
 if __name__ == '__main__':
     args = parser.parse_args()
-    a = args.game
-    is_using_mac = args.mac
-    print(is_using_mac)
-    fileToOpen = a
-    a = game_code_name.get(fileToOpen)
-    game = a
+    fileToOpen = args.game
+    binary_path = fileToOpen
+    game = game_code_name.get(fileToOpen)
+    
+    if args.rebuild:
+        while 1:
+            rebuild_path = input("Enter the path to the IPA file (or use DragnDrop)> ")
+            if os.path.exists(rebuild_path): break
+            else: print("[!] Invalid file path. Example: /Users/rldv1/Downloads/laser-27.269.ipa or laser-27.269.ipa")
+                
+        repacker = IPARepacker(rebuild_path, new_macho_path=fileToOpen, output_ipa="output.ipa")
+        repacker.unpack()
+        repacker.ensure_macho()
+        binary_path = os.path.join(repacker.app_path, fileToOpen)
+    
     setup()
-    main(game, is_using_mac)
+    main(game, args.mac)
+    
+    
