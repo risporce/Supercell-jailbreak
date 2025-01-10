@@ -38,30 +38,44 @@ And lastly, for those who shown me their concerns about me modifying the IPA and
   0. Download and extract zip or clone the repository `git clone https://github.com/risporce/Supercell-jailbreak.git` then `cd Supercell-jailbreak`
   1. Decrypt and extract the game IPA from your device and upload it to your computer. | Alternatively, download the decrypted IPA package from some site
   2. Connect your device to your computer via USB cable, make sure to trust your computer from your device.
-  3. From your computer, use any zip unarchiver like PeaZip or 7Zip to extract the IPA
-  4. Place the main executable file at the same directory as the script
-  5. Open Terminal app, use the `cd` comamnd to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
-  6. Execute this command in terminal: `python3 sc_protector_file_parser.py --game "replace this text under string to the executable file name, keep the quotes"`
-  7. If you moved the main executable, put it back into the IPA and replace the original one.
-  8. Compress the Payload folder into .zip and rename to .ipa
-  9. Use your favorite method to install the .IPA
-  10. Well it should work hopefully, enjoy!
+  3. Open Terminal app, use the `cd` command to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
+  4. Execute this command in terminal: `python3 sc_protector_file_parser.py --rebuild --game "replace this text under string to the executable file name, keep the quotes"`. See Troubleshooting below to see what is the executable filename.
+  
+    When the prompt ask you to drag and drop the IPA, take the .ipa file with your mouse and directly drop it in the terminal, remove any spaces created. If your directory path contains special characters such as spaces, `éçà` ...etc. you must put quotes `"` between the path automatically written by your terminal. 
+
+  5. Use your favorite method to install the output.ipa in the same directory as the script
+  6. Well it should work hopefully, enjoy!
 
   ### Usage with M chip series Mac
   0. Download and extract zip or clone the repository `git clone https://github.com/risporce/Supercell-jailbreak.git` then `cd Supercell-jailbreak`
   1. Decrypt and extract the game IPA from your device and upload it to your computer. |   Alternatively, download the decrypted IPA package from some site
   2. Install the IPA application on your Mac and disable protections such as SIP
-  3. From your computer, use any zip unarchiver like PeaZip or 7Zip to extract the .ipa from step 1
-  4. Place the main executable file at the same directory as the script
-  5. Open Terminal app, use the `cd` comamnd to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
-  6. Execute this command in terminal: `python3 sc_protector_file_parser.py --mac --game "replace this text under string to the executable file name, keep the quotes"`
-  7. If you moved the main executable, put it back into the IPA and replace the original one.
-  8. Compress the Payload folder into .zip and rename to .ipa
-  9. Use your favorite method to install the .IPA
-  10. Well it should work hopefully, enjoy!
+  3. Open Terminal app, use the `cd` command to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
+  4. Execute this command in terminal: `python3 sc_protector_file_parser.py --rebuild --game "replace this text under string to the executable file name, keep the quotes"`. See Troubleshooting below to see what is the executable filename.
+  
+    When the prompt ask you to drag and drop the IPA, take the .ipa file with your mouse and directly drop it in the terminal, remove any spaces created. If your directory path contains special characters such as spaces, `éçà` ...etc. you must put quotes `"` between the path automatically written by your terminal. 
+
+  5. Use your favorite method to install the output.ipa in the same directory as the script
+  6. Well it should work hopefully, enjoy!
 
 
 ## Troubleshooting
+
+### What is the executable filename?
+if you don't know what is the exact executable filename for the game, here's the list so you don't have to extract the ipa just to see what it's name.
+
+Brawl Stars: laser
+
+Squad Busters: Squad
+
+Clash of Clans: Clash of Clans
+
+Clash Royale: Clash_Royale
+
+Hay Day: Hay Day
+
+Boom Beach: Boom Beach
+
 
 ### Frida:
 
@@ -72,7 +86,6 @@ USB not recognized? try with Host instead https://github.com/frida/frida/issues/
 
  ### Crash after patching
 Don't reinstall the IPA from step 1, make sure to replace the current executable in the folder with the patched one from the script, then compress back the Payload folder into .zip and rename to .ipa to make a whole new patched IPA and install with a tool like [Sideloadly](https://sideloadly.io/), [Trollstore](https://trollstore.app/) ...etc.
-
 
 
 ## Contact ##

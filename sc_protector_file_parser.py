@@ -49,6 +49,7 @@ nameOffset = None
 ####
 decrypted_bi = None
 fileToOpen = None
+binary_path = None
 protectorLoaderPatchBytes = None
 ### protector loader
 protectorLoaderStartAddress = None # hd 1.63.204 //0x1348s
@@ -128,14 +129,6 @@ class IPARepacker:
                 shutil.rmtree(item_path)
                 print("[*] Removing", item_path)
         
-    def replace_macho(self):
-        macho_name = os.path.basename(self.macho_name)
-        macho_path = os.path.join(self.app_path, self.macho_name)
-        if os.path.exists(macho_path):
-            os.remove(macho_path)
-        shutil.copy(self.macho_name, macho_path)
-        os.chmod(macho_path, 0o755)
-        
     def ensure_macho(self):
         
         print("[*] Checking Mach-O...")
@@ -143,7 +136,7 @@ class IPARepacker:
         
         ENCRYPTED_STATE = self.is_macho_encrypted(macho_path)
         if os.path.exists(macho_path) and ENCRYPTED_STATE:
-            print(f"[!!!] Mach-O is encrypted. Cannot proceed.\n\n------- What to do in this case?:\n1. Use tweaks like iGameGod/CrackerXI\n2. Download IPA from http://decrypt.day or 4PDA\n\n[!] Dont open an issue on github about this as the problem lies on your end!\n----------------\n")
+            print(f"[!!!] Mach-O is encrypted. Cannot proceed.\n\n------- What to do in this case?:\n1. Use tweaks like iGameGod/CrackerXI\n2. Download IPA from https://decrypt.day, https://armconverter.com/decryptedappstore/us or 4PDA\n\n[!] Dont open an issue on github about this as the problem lies on your end!\n----------------\n")
             raise Exception
         elif not ENCRYPTED_STATE: print("[*] Mach-O is decrypted, continuing...")
         else:
@@ -230,7 +223,7 @@ def setup():
     global nameOffset
     loader_found = False
     getProtectorPatchBytes()
-    binary = MachO(fileToOpen)
+    binary = MachO(binary_path)
     current_offset = 0
     for header in binary.headers:
         current_offset += header.header._size_
@@ -270,7 +263,7 @@ def find__mh_execute_header_strtab_and_symbtab_offset(strTableStartOffset, strTa
     global startCountingAddress
     search_string = "__mh_execute_header".encode()
     search_bytes_symbol = bytes.fromhex("0f0110000000000001000000") # mh_execute_header symbols data
-    with open(fileToOpen, 'rb') as f:
+    with open(binary_path, 'rb') as f:
         #string table index
         f.seek(strTableStartOffset)
         string_table = f.read(strTableLength)
@@ -573,7 +566,7 @@ def main(game, mac):
 
 start_time = datetime.now()
 def mainFixing(biFile):
-    with open(fileToOpen, 'r+b') as binf:
+    with open(binary_path, 'r+b') as binf:
         removeProtectorLoader(binf)
         fixExport(binf) # in clash royale protector v5 this is non-existent, a check is in place to not fix it in case of cr
         fixBinary(binf, biFile)
@@ -583,7 +576,7 @@ def mainFixing(biFile):
 
     if args.rebuild:
         repacker.remove_useless()
-        repacker.replace_macho()
+        #repacker.replace_macho()
         repacker.pack()
     
     os._exit(0)
@@ -592,6 +585,7 @@ def mainFixing(biFile):
 if __name__ == '__main__':
     args = parser.parse_args()
     fileToOpen = args.game
+    binary_path = fileToOpen
     game = game_code_name.get(fileToOpen)
     
     if args.rebuild:
@@ -603,6 +597,7 @@ if __name__ == '__main__':
         repacker = IPARepacker(rebuild_path, new_macho_path=fileToOpen, output_ipa="output.ipa")
         repacker.unpack()
         repacker.ensure_macho()
+        binary_path = os.path.join(repacker.app_path, fileToOpen)
     
     setup()
     main(game, args.mac)
