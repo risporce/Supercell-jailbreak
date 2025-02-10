@@ -17,6 +17,7 @@ parser.add_argument('--game', help='The game name you want to patch, enter its e
 parser.add_argument('--mac', action='store_true', help='Use your Mac with apple M series chip to patch the app, requires you to install the IPA and disable a few protections including SIP.')
 parser.add_argument('--rebuild', action='store_true', help='Rebuild ipa, xd.')
 parser.add_argument('--device', help='Connect via USB using your device UDID. Use frida-ls-device command to find what is your deice UDID in the Id section of the command output.')
+parser.add_argument('--host', help="Connect via Host as a last resort attempt, however this option is way less stable than via USB.")
 game_code_name = {
     "Hay Day": "soil",
     "Clash_Royale": "scroll",
@@ -54,6 +55,7 @@ binary_path = None
 protectorLoaderPatchBytes = None
 ### protector loader
 protectorLoaderStartAddress = None # hd 1.63.204 //0x1348s
+frida_default_port = 27042
 
 
 
@@ -417,7 +419,7 @@ def read_null_terminated_string(binf):
     return string.decode('utf-8')
 
 
-def main(game, mac, device_id = None):
+def main(game, mac, device_id = None, host_ip = None):
     global session # frida script, needs to have a jailbroken ios device with frida-server installed. this is getting the necessary data in order to fix the binary
     
     if mac:
@@ -442,6 +444,8 @@ def main(game, mac, device_id = None):
     else:
         if device_id:
             device = frida.get_device(device_id, timeout=5)
+        elif host_ip:
+            device = frida.get_device_manager().add_remote_device(f"{host_ip}:{frida_default_port}")
         else:
             device = frida.get_usb_device()
         pid = device.spawn([f"com.supercell.{game}"])
@@ -605,6 +609,6 @@ if __name__ == '__main__':
         binary_path = os.path.join(repacker.app_path, fileToOpen)
     
     setup()
-    main(game, args.mac, args.device)
+    main(game, args.mac, args.device, args.host)
     
     

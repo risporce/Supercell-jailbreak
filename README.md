@@ -79,19 +79,34 @@ Boom Beach: Boom Beach
 
 ### Frida:
 
+
+#### Frida Device
 USB not recognized? Sometimes frida have difficulties getting the correct device to open via USB.
 But before attempting this step, make sure you have trusted the device with the computer and that your device is charging, if not, then your cable is most likely broken.
 
 If you have trusted the device and it's charging: in terminal execute this command:
 `frida-ls-devices`
-you should see a few devices including your iOS devices. If not try with Frida host parameters see https://github.com/frida/frida/issues/579#issuecomment-416574476
+you should see a few devices including your iOS devices. If not try with Frida host parameters see below for more information
 
 If you see your iOS device with `frida-ls-devices` then perfect, the script now support entering your device entering your device UUID to make the patch. Your device UUID appears as "Id" in the output of the `frida-ls-devices` command in the first column.
 You can execute this command in terminal:
 
 `python3 sc_protector_file_parser.py --rebuild --game "replace this text under string to the executable file name, keep the quotes" --device UUID` (replace UUID with the actual device UUID previously found.)
 
-USB not recognized? try with Host instead https://github.com/frida/frida/issues/579#issuecomment-416574476
+
+#### Frida Host
+
+This is on the very last resort as it's extremely unstable even on my device it doesn't work but this method does work for others so give it a try if you are really struck.
+
+1. Open your package manager and install NewTerm3 Beta (or another terminal of your choice). After that still from your iOS device open settings and start by making sure you are on the very same wifi as your computer, then in your network properties take note of the IP Address as you're gonna need it.
+
+2. Open the previously downloaded terminal and execute this command: `frida-server -l 192.168.XX.XX` replace the "X's" with the actual ip address you previously noted from step 1. Normally nothing will output which is the expected behavior.
+
+3. Now from your computer execute this command :
+
+`python3 sc_protector_file_parser.py --rebuild --game "replace this text under string to the executable file name, keep the quotes" --host "192.168.XX.XX"` replace the "X's" with the actual ip address you previously noted from step 1.
+
+Hopefully this should work, but if you get such error: `"Failed to spawn: unable to access process with pid 1 from the current user account"`, I don't have a solution for that right now, sorry. Try to fix your USB setup for better result.
 
 ### Python:
  Missing packages even after installing them ? You may have multiples instances of Python installed on your system, use `python3 -m pip install package_name` where you replace package_name with the actual package name and run `python3 sc_protector_file_parser.py ...` (line from step 6)
