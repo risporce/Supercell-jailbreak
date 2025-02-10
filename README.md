@@ -41,7 +41,7 @@ And lastly, for those who shown me their concerns about me modifying the IPA and
   3. Open Terminal app, use the `cd` command to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
   4. Execute this command in terminal: `python3 sc_protector_file_parser.py --rebuild --game "replace this text under string to the executable file name, keep the quotes"`. See Troubleshooting below to see what is the executable filename.
   
-    When the prompt ask you to drag and drop the IPA, take the .ipa file with your mouse and directly drop it in the terminal, remove any spaces created. If your directory path contains special characters such as spaces, `éçà` ...etc. you must put quotes `"` between the path automatically written by your terminal. 
+  When the prompt ask you to drag and drop the IPA, take the .ipa file with your mouse and directly drop it in the terminal, remove any spaces created. If your directory path contains special characters such as spaces, `éçà` ...etc. you must put quotes `"` between the path automatically written by your terminal. 
 
   5. Use your favorite method to install the output.ipa in the same directory as the script
   6. Well it should work hopefully, enjoy!
@@ -53,7 +53,7 @@ And lastly, for those who shown me their concerns about me modifying the IPA and
   3. Open Terminal app, use the `cd` command to open that folder in your terminal, example my files are in `C:\protector\Supercell-jailbreak` enter in terminal  (cd "C:\protector\Supercell-jailbreak")
   4. Execute this command in terminal: `python3 sc_protector_file_parser.py --mac --rebuild --game "replace this text under string to the executable file name, keep the quotes"`. See Troubleshooting below to see what is the executable filename.
   
-    When the prompt ask you to drag and drop the IPA, take the .ipa file with your mouse and directly drop it in the terminal, remove any spaces created. If your directory path contains special characters such as spaces, `éçà` ...etc. you must put quotes `"` between the path automatically written by your terminal. 
+   When the prompt ask you to drag and drop the IPA, take the .ipa file with your mouse and directly drop it in the terminal, remove any spaces created. If your directory path contains special characters such as spaces, `éçà` ...etc. you must put quotes `"` between the path automatically written by your terminal. 
 
   5. Use your favorite method to install the output.ipa in the same directory as the script
   6. Well it should work hopefully, enjoy!
