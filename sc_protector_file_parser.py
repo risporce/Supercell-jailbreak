@@ -13,9 +13,10 @@ import struct
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--game', help='The game name you want to patch, enter its exact binary filename as string ex: "laser", "Clash of Clans", "Clash_Royale"')
-parser.add_argument('--mac', action='store_true', help='Use your Mac with apple M series chip to patch the app, requires you to install the IPA and disable a few protections including SIP')
+parser.add_argument('--game', help='The game name you want to patch, enter its exact binary filename as string ex: "laser", "Clash of Clans", "Clash_Royale".')
+parser.add_argument('--mac', action='store_true', help='Use your Mac with apple M series chip to patch the app, requires you to install the IPA and disable a few protections including SIP.')
 parser.add_argument('--rebuild', action='store_true', help='Rebuild ipa, xd.')
+parser.add_argument('--device', help='Connect via USB using your device UDID. Use frida-ls-device command to find what is your deice UDID in the Id section of the command output.')
 game_code_name = {
     "Hay Day": "soil",
     "Clash_Royale": "scroll",
@@ -416,11 +417,11 @@ def read_null_terminated_string(binf):
     return string.decode('utf-8')
 
 
-def main(game, mac):
+def main(game, mac, device_id = None):
     global session # frida script, needs to have a jailbroken ios device with frida-server installed. this is getting the necessary data in order to fix the binary
     
     if mac:
-        if is_arm_mac() and check_sip() and check_security_args():
+        if is_arm_mac() and check_security_args():
             print("[*] ARM-based macOS device detected, we try to use your host instead of a phone")
             
             device = frida.get_local_device()
@@ -431,6 +432,7 @@ def main(game, mac):
             try: 
                 pid = int(subprocess.check_output(["pgrep", game], text=True).strip())
             except Exception as e:
+                print(e)
                 print("[!] Failed to catch process PID, if your target game is launched in the dock, you need to figure out why pgrep command is causing an error. (you didnt work out? open issue)")
                 print("[*] Or just remove --mac from args to use iPhone")
                 exit(1)
@@ -438,7 +440,10 @@ def main(game, mac):
              print("[*] SIP is probably enabled, disable it or remove --mac from args to use iPhone")
              exit(1)
     else:
-        device = frida.get_usb_device()
+        if device_id:
+            device = frida.get_device(device_id, timeout=5)
+        else:
+            device = frida.get_usb_device()
         pid = device.spawn([f"com.supercell.{game}"])
     
     
@@ -600,6 +605,6 @@ if __name__ == '__main__':
         binary_path = os.path.join(repacker.app_path, fileToOpen)
     
     setup()
-    main(game, args.mac)
+    main(game, args.mac, args.device)
     
     
