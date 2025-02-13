@@ -100,7 +100,7 @@ This is on the very last resort as it's extremely unstable even on my device it 
 
 1. Open your package manager and install NewTerm3 Beta (or another terminal of your choice). After that still from your iOS device open settings and start by making sure you are on the very same wifi as your computer, then in your network properties take note of the IP Address as you're gonna need it.
 
-2. Open the previously downloaded terminal and execute this command: `frida-server -l 192.168.XX.XX` replace the "X's" with the actual ip address you previously noted from step 1. Normally nothing will output which is the expected behavior.
+2. Open the previously downloaded terminal and execute these commands one after another: `su` ; then for the password type `alpine` if you have not changed the default password; then `frida-server -l 192.168.XX.XX` replace the "X's" with the actual ip address you previously noted from step 1. Normally nothing will output which is the expected behavior.
 
 3. Now from your computer execute this command :
 
