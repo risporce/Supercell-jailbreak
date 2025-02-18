@@ -452,7 +452,7 @@ def main(game, mac, device_id = None, host_ip = None):
     
     
     session = device.attach(pid) # the address of protectorBase.add(0x0) can change any new build of protector supercell is shipping in their client, at this moment it's 0x429728
-    if game == 'squad' or game == 'reef':
+    if game == 'reef':
         script = session.create_script(f'''
             var protectorBase = Module.findBaseAddress("{game}x");
             var StringFunctionEmulation = protectorBase.add(0x292cec);
@@ -483,7 +483,7 @@ def main(game, mac, device_id = None, host_ip = None):
                 }}
             }});
             ''')
-    elif game == 'laser' or game == 'soil' or game == 'magic':
+    elif game == 'laser' or game == 'soil' or game == 'magic' or game == 'squad':
         script = session.create_script(f'''
             var protectorBase = Module.findBaseAddress("{game}x");
             var StringFunctionEmulation = protectorBase.add(0xfa80c);
