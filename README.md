@@ -10,7 +10,7 @@ So while other games are still easily fixable by the script with updated offset 
 ### Status
 | Game           | Working|
 |----------------|--------|
-| Brawl Stars    | ✅ Yes |
+| Brawl Stars    | ❌ No  |
 | Hay Day        | ✅ Yes |
 | Squad Busters  | ✅ Yes |
 | Boom Beach     | ✅ Yes |
