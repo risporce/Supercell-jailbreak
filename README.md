@@ -11,7 +11,7 @@ So while other games are still easily fixable by the script with updated offset 
 | Game           | Working|
 |----------------|--------|
 | Brawl Stars    | ❌ No  |
-| Hay Day        | ✅ Yes |
+| Hay Day        | ❌ No  |
 | Squad Busters  | ✅ Yes |
 | Boom Beach     | ✅ Yes |
 | Clash of Clans | ✅ Yes |
