@@ -3,7 +3,7 @@
 ## Notes: ##
 # **No more ipas will be uploaded here**
 
-So while other games are still easily fixable by the script with updated offset for the protector, Clash Royale on the other hand requires a rebuilding of LC_DYLD_CHAINED_FIXUPS. This will come to other games soon as they all will update to support iOS 14 as minimum eventually. IF but really IF i ever have the motivation to go throught the pain of trying again to fix iOS 14+ built executables and suceed, I will upload updated script here, otherwise **this repo is dead** or may update the script to support updated version of the protector.
+NEW PROTECTION IN SUPERCELL GAMES : this protection completely patch the use of this script, therefore a new bypass is needed
 
 ## Script ##
 
@@ -13,7 +13,7 @@ So while other games are still easily fixable by the script with updated offset 
 | Brawl Stars    | ❌ No  |
 | Hay Day        | ❌ No  |
 | Squad Busters  | ✅ Yes |
-| Boom Beach     | ✅ Yes |
+| Boom Beach     | ❌ No  |
 | Clash of Clans | ✅ Yes |
 | Clash Royale   | ❌ No  |
 
