@@ -14,7 +14,7 @@ NEW PROTECTION IN SUPERCELL GAMES : this protection completely patch the use of 
 | Hay Day        | ❌ No  |
 | Squad Busters  | ✅ Yes |
 | Boom Beach     | ❌ No  |
-| Clash of Clans | ✅ Yes |
+| Clash of Clans | ❌ No  |
 | Clash Royale   | ❌ No  |
 
 Note to every developer: I made this script while I had not the slightest idea of what Mach-O executables are, variable names are very unrepresentative and may be even misleading.
