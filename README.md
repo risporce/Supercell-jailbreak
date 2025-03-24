@@ -15,7 +15,16 @@ NEW PROTECTION IN SUPERCELL GAMES : this protection completely patch the use of 
 | Squad Busters  | ✅ Yes |
 | Boom Beach     | ❌ No  |
 | Clash of Clans | ✅ Yes |
-| Clash Royale   | ❌ No  |
+| Clash Royale   | ✅ Yes<sup>*</sup>  |
+
+*Clash Royale works now (for the moment) if you follow these slightly different instructions:
+
+1. Connect a jailbroken phone and have frida installed
+2. run python3 get_cr_syms.py
+3. this should create a seperate file that you'll need for the next step
+4. run python3 patch_cr.py
+5. The script will update the binary in place so no need to do anything else other than repack the ipa and load it onto your phone.
+
 
 Note to every developer: I made this script while I had not the slightest idea of what Mach-O executables are, variable names are very unrepresentative and may be even misleading.
 
